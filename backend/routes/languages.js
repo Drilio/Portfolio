@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const languageCtrl = require('../controllers/languages');
+const auth = require('../middleware/auth')
 
 
 router.post('/', auth, languageCtrl.createLanguage);

@@ -25,7 +25,7 @@ exports.getAllLanguages = (req, res, next) => {
         .catch(error => res.status(400).json({ error }))
 }
 
-exports.getOneLanugage = (req, res, next) => {
+exports.getOneLanguage = (req, res, next) => {
     language.findOne({ _id: req.params.id })
         .then(language => res.status(200).json(language))
         .catch(error => res.status(404).json({ error }));
