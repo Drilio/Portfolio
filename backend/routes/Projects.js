@@ -6,7 +6,7 @@ const sharp = require('../middleware/sharp');
 const projectCtrl = require('../controllers/projects.js');
 
 
-router.post('/', auth, multer, sharp, projectCtrl.createProject);
+router.post('/', projectCtrl.createProject);
 router.get('/', projectCtrl.getAllProjects);
 router.get('/:id', projectCtrl.getOneProject);
 router.put('/:id', auth, multer, projectCtrl.modifyProject);

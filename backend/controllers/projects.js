@@ -1,15 +1,17 @@
 const Project = require('../models/projects');
 
 exports.createProject = (req, res, next) => {
-    const projectObject = JSON.parse(req.body.project);
-    delete projectObject._id;
-    delete projectObject.userId;
-
+    const projectObject = req.body;
+    // delete projectObject._id;
+    // delete projectObject.userId;
+    console.log(projectObject)
     const project = new Project({
-        ...projectObject,
-        userId: req.auth.userId,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        ...projectObject
+        // userId: req.auth.userId,
+        // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
+
+    console.log(project);
 
     project.save()
         .then(() => {
@@ -62,6 +64,7 @@ exports.deleteProject = (req, res, next) => {
 }
 
 exports.getAllProjects = (req, res, next) => {
+    //agregate pour avoir les infos par projet
     Project.find()
         .then(projects => res.status(200).json(projects))
         .catch(error => res.status(400).json({ error }))

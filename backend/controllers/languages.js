@@ -1,16 +1,16 @@
 const language = require('../models/Languages');
 
 exports.createLanguage = (req, res, next) => {
-    const languageObject = JSON.parse(req.body.project);
-    delete languageObject._id;
-    delete languageObject.userId;
+    const languageObject = req.body;
+    // delete languageObject._id;
+    // delete languageObject.userId;
 
-    const language = new language({
+    const newObject = new language({
         ...languageObject,
-        userId: req.auth.userId,
     });
+    console.log(newObject)
 
-    language.save()
+    newObject.save()
         .then(() => {
             res.status(201).json({ message: 'Object enregistré !' });
         })

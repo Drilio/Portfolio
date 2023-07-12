@@ -4,7 +4,7 @@ const languageCtrl = require('../controllers/languages');
 const auth = require('../middleware/auth')
 
 
-router.post('/', auth, languageCtrl.createLanguage);
+router.post('/', languageCtrl.createLanguage);
 router.get('/', languageCtrl.getAllLanguages);
 router.get('/:id', languageCtrl.getOneLanguage);
 router.put('/:id', auth, languageCtrl.modifyLanguage);

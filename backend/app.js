@@ -9,7 +9,7 @@ const userRoutes = require('./routes/user');
 const projectRoutes = require('./routes/Projects');
 const languagesRoutes = require('./routes/languages');
 
-mongoose.connect('mongodb+srv://antoineroy92:test123@clustervieuxgrimoire.wfdhr4u.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://antoineroy92:test123@clustervieuxgrimoire.wfdhr4u.mongodb.net/portfolio',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/auth', userRoutes);
-app.use('/api/project', projectRoutes);
+app.use('/api/projects', projectRoutes);
 app.use('/api/languages', languagesRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
