@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 const projectShema = mongoose.Schema({
     title: { type: String, required: true },
-    languages: [
+    languagesId: [
         {
             languageId: String
         }],

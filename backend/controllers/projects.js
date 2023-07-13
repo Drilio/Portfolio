@@ -64,9 +64,23 @@ exports.deleteProject = (req, res, next) => {
 }
 
 exports.getAllProjects = (req, res, next) => {
-    //agregate pour avoir les infos par projet
-    Project.find()
-        .then(projects => res.status(200).json(projects))
+    //agregate pour avoir les infos par 
+    Project.aggregate([
+        {
+            $lookup: {
+                from: 'languages',
+                let: { "languageIds": { $toObjectId: '$languagesId.languageId' } },
+                pipeline: [
+                    { $match: { $expr: [{ "_id": "$$languageIds" }] } },
+                ],
+                as: 'languagesUse'
+            }
+        }
+    ])
+        .then(projects => {
+            console.log(projects);
+            res.status(200).json(projects);
+        })
         .catch(error => res.status(400).json({ error }))
 }
 
