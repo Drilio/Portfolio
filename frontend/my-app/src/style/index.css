@@ -1,0 +1,12 @@
+body {
+    display: flex;
+    gap: 50px;
+    width: 100%;
+    flex-direction: column;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

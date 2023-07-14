@@ -1,0 +1,25 @@
+.header {
+    margin: 0 20px 0 20px
+}
+
+.menu-link,
+.menu-connection {
+    display: flex;
+    gap: 20px;
+}
+
+.menu-link,
+.menu-connection {
+    list-style-type: none;
+}
+
+.menu-link li a,
+.menu-connection li a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-header {
+    display: flex;
+    justify-content: space-between;
+}

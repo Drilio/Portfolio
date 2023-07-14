@@ -6,9 +6,9 @@ exports.createProject = (req, res, next) => {
     // delete projectObject.userId;
     console.log(projectObject)
     const project = new Project({
-        ...projectObject
+        ...projectObject,
         // userId: req.auth.userId,
-        // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
 
     console.log(project);
