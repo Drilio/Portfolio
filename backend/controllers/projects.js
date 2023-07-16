@@ -7,7 +7,6 @@ exports.createProject = (req, res, next) => {
     console.log(projectObject)
     const project = new Project({
         ...projectObject,
-        // userId: req.auth.userId,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
 
