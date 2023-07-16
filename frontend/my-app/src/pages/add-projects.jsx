@@ -4,7 +4,7 @@ export default function AddProjects() {
     const [languages, setLanguages] = useState([])
     const [imageUrl, setImageUrl] = useState('');
     const [title, setTitle] = useState('')
-    const [projectLanguages, setProjectLanguages] = useState([])
+    const [languagesId, setLanguagesId] = useState([])
 
     //On récupère les languages depuis l'API
     const fetchLanguagesData = () => {
@@ -26,9 +26,9 @@ export default function AddProjects() {
         const isChecked = event.target.checked;
 
         if (isChecked) {
-            setProjectLanguages(prevLanguages => [...prevLanguages, languageId]);
+            setLanguagesId(prevLanguages => [...prevLanguages, languageId]);
         } else {
-            setProjectLanguages(prevLanguages =>
+            setLanguagesId(prevLanguages =>
                 prevLanguages.filter(lang => lang !== languageId)
             );
         }
@@ -43,7 +43,7 @@ export default function AddProjects() {
         event.preventDefault();
         const dataToSubmit = {
             title,
-            projectLanguages,
+            languagesId,
             imageUrl
         }
         // console.log(dataToSubmit)
