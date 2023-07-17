@@ -5,8 +5,8 @@ const mongoose = require('mongoose')
 
 const projectShema = mongoose.Schema({
     title: { type: String, required: true },
-    languagesId: [{ languageId: String }],
-    imageUrl: { type: String, required: true },
+    languagesId: [{ type: String }],
+    imageUrl: { type: String }
 })
 
 module.exports = mongoose.model('Project', projectShema);

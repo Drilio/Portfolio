@@ -4,13 +4,14 @@ exports.createProject = (req, res, next) => {
     const projectObject = req.body;
     // delete projectObject._id;
     // delete projectObject.userId;
-    console.log(projectObject)
+    console.log(req.body)
     const project = new Project({
         ...projectObject,
+        // languagesId: JSON.parse(req.body.languagesId),
+        languagesId: ["64afeb7e8b1439ab2b06c3fe", "64ae7fc4b66d905ef5441dc3"],
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
-
-    console.log(project);
+    console.log(project)
 
     project.save()
         .then(() => {

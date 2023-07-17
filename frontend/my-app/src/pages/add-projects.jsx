@@ -41,18 +41,22 @@ export default function AddProjects() {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        const dataToSubmit = {
-            title,
-            languagesId,
-            imageUrl
-        }
-        // console.log(dataToSubmit)
+        // récupérer toute les checkbox "On" puis append le tableau dans le formData
+        let form = document.getElementById('add-projects-form');
+        let formData = new FormData(form);
+        // let formData = new FormData();
+
+        // formData.append('title', title);
+        // formData.append('languagesId', '[{ "languageId": "64afeb7e8b1439ab2b06c3fe" }, { "languageId": "64ae7fc4b66d905ef5441dc3" }]');
+        // formData.append('image', event.target.image.files[0]);
+
+        console.log(formData)
         fetch('http://localhost:3000/api/projects', {
             method: "POST",
-            headers: { 'Content-type': 'application/json;charset=UTF-8', },
-            body: JSON.stringify(dataToSubmit)
+            // headers: { 'Content-type': 'application/json;charset=UTF-8', },
+            body: formData
         })
-            .then(console.log(dataToSubmit))
+            .then(console.log(formData))
             .then(res => res.json())
             .then(res => console.log(res))
             .catch(error => {
@@ -67,16 +71,16 @@ export default function AddProjects() {
 
     return (
         <div>
-            <form method='post' action='#' onSubmit={handleFormSubmit} className="add-projects-form">
+            <form method='post' id="add-projects-form" onSubmit={handleFormSubmit} className="add-projects-form">
                 <label>Titre du projet</label>
-                <input type="text" id="madd-projects-form-title" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Entrer le titre du projet" name="titre" required></input>
+                <input type="text" id="madd-projects-form-title" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Entrer le titre du projet" name="title" required></input>
                 <fieldset>
                     <legend>languages utilisé</legend>
                     <div>
                         {languages.length > 0 && (
                             <div>
                                 {languages.map(language => (
-                                    <div className='language' key={language._id}>
+                                    <div className='languageId' key={language._id}>
                                         <input onChange={handleCheckboxChange} type="checkbox" id={language._id} name={language.Name}></input>
                                         <label htmlFor={language.Name}>{language.Name}</label>
                                     </div>
