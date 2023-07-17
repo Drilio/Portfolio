@@ -89,6 +89,13 @@ exports.getAllProjects = (req, res, next) => {
                 as: 'languagesUse',
             },
         },
+        {
+            $project: {
+                title: 1,
+                imageUrl: 1,
+                languagesUse: { $map: { input: '$languagesUse', as: 'lang', in: '$$lang.Name' } },
+            },
+        },
     ])
         .then(projects => {
             console.log(projects);

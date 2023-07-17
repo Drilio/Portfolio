@@ -14,6 +14,7 @@ export default function Projects() {
             })
     }
 
+
     useEffect(() => {
         fetchProjectsData()
     }, [])
@@ -26,7 +27,12 @@ export default function Projects() {
                     {projects.map(project => (
                         <div className="project" key={project._id}>
                             <h3>{project.title}</h3>
-                            <img src={project.imageUrl}></img>
+                            <img src={project.imageUrl} alt="project-preview"></img>
+                            {project.languagesUse.map(language => (
+                                <div key={`${project._id}-${language}`}>
+                                    {language}
+                                </div>
+                            ))}
                         </div>
                     ))}
                 </div>

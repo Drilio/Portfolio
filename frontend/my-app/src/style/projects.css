@@ -10,3 +10,11 @@
 .project {
     width: calc((100% - 200px)/3);
 }
+
+.projects-contener {
+    display: flex;
+}
+
+.projects-contener img {
+    height: 200px;
+}
