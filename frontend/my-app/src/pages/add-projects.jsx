@@ -4,7 +4,6 @@ export default function AddProjects() {
     const [languages, setLanguages] = useState([])
     const [imageUrl, setImageUrl] = useState('');
     const [title, setTitle] = useState('')
-    const [languagesId, setLanguagesId] = useState([])
 
     //On récupère les languages depuis l'API
     const fetchLanguagesData = () => {
@@ -19,20 +18,7 @@ export default function AddProjects() {
                 console.error('Error fetching languages:', error);
             });
     }
-    //On récupère l'information des languages utilisés
-    function handleCheckboxChange(event) {
-        const languageId = event.target.id;
-        console.log(languageId)
-        const isChecked = event.target.checked;
 
-        if (isChecked) {
-            setLanguagesId(prevLanguages => [...prevLanguages, languageId]);
-        } else {
-            setLanguagesId(prevLanguages =>
-                prevLanguages.filter(lang => lang !== languageId)
-            );
-        }
-    }
 
     // On fait en sorte d'avoir une prévisualisation de l'image (ici on créé l'URL)
     function handleImageChange(e) {
@@ -42,21 +28,28 @@ export default function AddProjects() {
     function handleFormSubmit(event) {
         event.preventDefault();
         // récupérer toute les checkbox "On" puis append le tableau dans le formData
+        let checkboxes = document.querySelectorAll('input[type=checkbox]');
+        let checkboxesCheckId = [];
+        checkboxes.forEach(element => {
+            if (element.checked) {
+                console.log(element);
+                checkboxesCheckId.push(element.id);
+            }
+        });
+        console.log(checkboxesCheckId);
         let form = document.getElementById('add-projects-form');
         let formData = new FormData(form);
         // let formData = new FormData();
-
         // formData.append('title', title);
-        // formData.append('languagesId', '[{ "languageId": "64afeb7e8b1439ab2b06c3fe" }, { "languageId": "64ae7fc4b66d905ef5441dc3" }]');
+        checkboxesCheckId.forEach(id => {
+            formData.append('languagesId', id);
+        });
         // formData.append('image', event.target.image.files[0]);
-
-        console.log(formData)
         fetch('http://localhost:3000/api/projects', {
             method: "POST",
             // headers: { 'Content-type': 'application/json;charset=UTF-8', },
             body: formData
         })
-            .then(console.log(formData))
             .then(res => res.json())
             .then(res => console.log(res))
             .catch(error => {
@@ -81,7 +74,7 @@ export default function AddProjects() {
                             <div>
                                 {languages.map(language => (
                                     <div className='languageId' key={language._id}>
-                                        <input onChange={handleCheckboxChange} type="checkbox" id={language._id} name={language.Name}></input>
+                                        <input type="checkbox" id={language._id} name={language.Name}></input>
                                         <label htmlFor={language.Name}>{language.Name}</label>
                                     </div>
                                 ))}

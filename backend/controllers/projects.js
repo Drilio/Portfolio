@@ -8,7 +8,6 @@ exports.createProject = (req, res, next) => {
     const project = new Project({
         ...projectObject,
         // languagesId: JSON.parse(req.body.languagesId),
-        languagesId: ["64afeb7e8b1439ab2b06c3fe", "64ae7fc4b66d905ef5441dc3"],
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     console.log(project)
@@ -70,20 +69,26 @@ exports.getAllProjects = (req, res, next) => {
                 convertedLanguageIds: {
                     $map: {
                         input: '$languagesId',
-                        as: 'language',
-                        in: { $toObjectId: '$$language.languageId' }
-                    }
-                }
-            }
+                        as: 'languageId',
+                        in: {
+                            $convert: {
+                                input: { $toObjectId: '$$languageId' },
+                                to: 'objectId',
+                                onError: null,
+                            },
+                        },
+                    },
+                },
+            },
         },
         {
             $lookup: {
                 from: 'languages',
                 localField: 'convertedLanguageIds',
                 foreignField: '_id',
-                as: 'languagesUse'
-            }
-        }
+                as: 'languagesUse',
+            },
+        },
     ])
         .then(projects => {
             console.log(projects);
