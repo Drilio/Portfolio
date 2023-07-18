@@ -8,8 +8,10 @@ import Portfolio from './pages/portfolio';
 import Contacts from './pages/contacts';
 import Connection from './pages/connection';
 import AddProjects from './pages/add-projects';
+import AddLanguages from './pages/add-languages';
 import Header from './components/Header';
 import Banner from './components/Banner';
+import './style/font.css';
 import "./style/index.css"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,6 +27,7 @@ root.render(
         <Route path="/portfolio" element={<Portfolio />}></Route>
         <Route path="/connection" element={<Connection />}></Route>
         <Route path="/add-projects" element={<AddProjects />}></Route>
+        <Route path="/add-languages" element={<AddLanguages />}></Route>
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>

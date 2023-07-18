@@ -10,7 +10,7 @@ export default function Header() {
                     <div>
                         <ul className='menu-link'>
                             <li><NavLink to="/" id="home" className="">Accueil</NavLink></li>
-                            <li><NavLink to="/portfolio" id="projects" className="">Projets</NavLink></li>
+                            <li><NavLink to="/portfolio" id="projects" className="">Portfolio</NavLink></li>
                             <li><NavLink to="/about" id="about" className="">A Propos</NavLink></li>
                             <li><NavLink to="/contacts" id="contacts" className="">Contacts</NavLink></li>
                         </ul>
@@ -18,7 +18,8 @@ export default function Header() {
                     <div>
                         <ul className='menu-connection'>
                             <li><NavLink to="/connection" id="connection" className="">Connexion</NavLink></li>
-                            <li><NavLink to="/add-projects" id="addprojects" className="">Ajouter un Projet</NavLink></li>
+                            <li><NavLink to="/add-projects" id="addprojects" className="">Ajouter un projet</NavLink></li>
+                            <li><NavLink to="/add-languages" id='addlanguage'>Ajouter un language</NavLink></li>
                         </ul>
                     </div>
 

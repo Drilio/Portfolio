@@ -4,9 +4,10 @@ exports.createLanguage = (req, res, next) => {
     const languageObject = req.body;
     // delete languageObject._id;
     // delete languageObject.userId;
-
+    console.log(req.body)
     const newObject = new language({
         ...languageObject,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     console.log(newObject)
 

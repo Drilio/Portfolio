@@ -36,18 +36,16 @@ export default function AddProjects() {
                 checkboxesCheckId.push(element.id);
             }
         });
-        console.log(checkboxesCheckId);
+
         let form = document.getElementById('add-projects-form');
         let formData = new FormData(form);
-        // let formData = new FormData();
-        // formData.append('title', title);
+
         checkboxesCheckId.forEach(id => {
             formData.append('languagesId', id);
         });
-        // formData.append('image', event.target.image.files[0]);
+
         fetch('http://localhost:3000/api/projects', {
             method: "POST",
-            // headers: { 'Content-type': 'application/json;charset=UTF-8', },
             body: formData
         })
             .then(res => res.json())

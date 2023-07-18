@@ -86,7 +86,7 @@ export default function Connection() {
                     <input type="text" id="my-signup-form-username" placeholder="Entrer le nom d'utilisateur" name="username" required></input>
                     <label htmlFor="my-signup-form-password">Mot de Passe</label>
                     <input id="my-signup-form-password" type="password" placeholder="Entrer le mot de passe" name="password" required></input>
-                    <input type="submit" id='my-signup-form-submit' value='Connexion'></input>
+                    <input type="submit" id='my-signup-form-submit' value='Créer un compte'></input>
                     <p id="error-signup"></p>
                 </form>
             </div>

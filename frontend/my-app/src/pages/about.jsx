@@ -1,7 +1,9 @@
+import DownloadCV from "../components/DownloadCV"
+
 export default function about() {
     return (
         <div>
-            <p>test About</p>
+            <DownloadCV></DownloadCV>
         </div>
     )
 }

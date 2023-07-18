@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 
 const languageSchema = mongoose.Schema({
     Name: { type: String, required: true },
+    imageUrl: { type: String }
 })
 
 module.exports = mongoose.model('Language', languageSchema);
