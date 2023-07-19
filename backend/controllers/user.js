@@ -47,3 +47,25 @@ exports.login = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }))
 };
+
+exports.isconnect = (req, res, next) => {
+    let userId = req.body.userId;
+    let frontToken = req.body.token;
+    User.findOne({ _id: userId })
+        .then(user => {
+            if (user === null) {
+                res.status(401).json({ message: 'l\'utilisateur n\'existe pas' });
+            } else {
+                jwt.verify(frontToken, 'RANDOM_TOKEN_SECRET', (error, decoded) => {
+                    if (error) {
+                        res.status(401).json({ message: "le token n'est pas ou plus valide" })
+                    } else {
+                        res.status(200).json({ message: 'Token valide' });
+                    }
+                })
+            }
+        })
+        .catch(error => {
+            res.status(500).json({ message: "une erreur s\'est produite" })
+        })
+}
