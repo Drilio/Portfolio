@@ -1,3 +1,13 @@
 .language-logo {
     height: 50px;
 }
+
+.languages {
+    display: flex;
+    gap: 10px;
+}
+
+.language-button {
+    display: flex;
+    flex-direction: column;
+}

@@ -26,7 +26,7 @@ export default function Portfolio() {
             <div className='avaible-languages'>
                 <h2>Les languages existant sont les suivants</h2>
                 {languages.length > 0 && (
-                    <div>
+                    <div className="languages">
                         {languages.map(language => (
                             <div className="language-button" key={language._id + "NameLogo"}>
                                 <button key={language._id}>{language.Name}</button>

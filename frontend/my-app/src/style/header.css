@@ -8,6 +8,11 @@
     gap: 20px;
 }
 
+.edit {
+    display: flex;
+    gap: 20px;
+}
+
 .menu-link,
 .menu-connection {
     list-style-type: none;
