@@ -1,19 +1,36 @@
-import { NavLink } from 'react-router-dom'
-import "../style/header.css"
+import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import "../style/header.css";
+import IsConnected from './AuthHelper';
 
 export default function Header() {
+    const [isConnected, setIsConnected] = useState(false);
 
-    function logout() {
-        console.log("test logout")
-        let logout = document.getElementById('logout');
-        let userToken = window.localStorage.getItem("responseToken");
-        logout.addEventListener('click', function (e) {
-            if (userToken) {
-                e.preventDefault();
-                localStorage.clear();
-                document.location.href = "./"
-            }
-        })
+    useEffect(() => {
+        const token = window.localStorage.getItem('responseToken')
+        const userId = window.localStorage.getItem('responseId')
+
+        IsConnected(token, userId)
+            .then((isValid) => {
+                if (isValid === true) {
+                    setIsConnected(true);
+                } else {
+                    setIsConnected(false);
+                }
+            })
+            .catch((error) => {
+                console.log("test isConnected false")
+                setIsConnected(false)
+            });
+    }, [])
+
+    function log() {
+        console.log("test log")
+        if (isConnected) {
+            localStorage.clear();
+            setIsConnected(false); // Mise à jour de l'état isConnected après la déconnexion
+            document.location.href = "./";
+        }
     }
 
     return (
@@ -30,8 +47,14 @@ export default function Header() {
                     </div>
                     <div>
                         <ul className='menu-connection'>
-                            <li><NavLink to="/connection" id="connection" className="">Connexion</NavLink></li>
-                            <li id="logout"><button onClick={logout}>Deconnexion</button></li>
+                            <div>
+                                {isConnected ? (
+                                    <li><NavLink to="/" id="log" onClick={log}>Déconnexion</NavLink></li>
+                                ) : (
+                                    <li><NavLink to="/connection" id="log" className="">Connexion</NavLink></li>
+                                )}
+                            </div>
+
                             <div className='edit'>
                                 <li><NavLink to="/add-projects" id="addprojects" className="">Ajouter un projet</NavLink></li>
                                 <li><NavLink to="/add-languages" id='addlanguage'>Ajouter un language</NavLink></li>

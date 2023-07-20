@@ -51,6 +51,9 @@ exports.login = (req, res, next) => {
 exports.isconnect = (req, res, next) => {
     let userId = req.body.userId;
     let frontToken = req.body.token;
+    console.log('userId:', userId);
+    console.log('frontToken:', frontToken);
+    console.log(req.body)
     User.findOne({ _id: userId })
         .then(user => {
             if (user === null) {
