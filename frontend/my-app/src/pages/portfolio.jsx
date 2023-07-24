@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import "../style/portfolio.css"
 import IsConnected from '../components/AuthHelper';
 import Modal from '../components/Modal';
+import Languages from "../components/Languages";
 
 export default function Portfolio() {
     const [languages, setLanguages] = useState([])
@@ -11,6 +12,11 @@ export default function Portfolio() {
     const [modalType, setModalType] = useState('A');
     const [title, setTitle] = useState('')
     const [imageUrl, setImageUrl] = useState('');
+    const [nameLanguage, setNameLanguage] = useState('')
+    const [imageLanguageUrl, setImageLanguageUrl] = useState('');
+    const [formProject, setFormProject] = useState(false)
+    const [formLanguage, setFormLanguage] = useState(false)
+
 
     //verficiation de la connexion
     useEffect(() => {
@@ -66,7 +72,16 @@ export default function Portfolio() {
     }
 
 
-    //gestion du formulaire 
+    //gestion du formulaire Projet
+
+    function makeFormProjectsAppear() {
+        setFormProject(true)
+    }
+
+    function makeFormProjectsDisapear() {
+        setFormProject(false)
+    }
+
     function handleFormSubmit(event) {
         event.preventDefault();
         // récupérer toute les checkbox "On" puis append le tableau dans le formData
@@ -97,6 +112,38 @@ export default function Portfolio() {
             });
     }
 
+    //Gestion du formulaire Langage
+    function makeFormLanguagesAppear() {
+        setFormLanguage(true)
+    }
+
+    function makeFormLanguagesDisapear() {
+        setFormLanguage(false)
+    }
+
+    function handleImageLanguageChange(e) {
+        setImageLanguageUrl(URL.createObjectURL(e.target.files[0]));
+    }
+
+    function handleFormLanguageSubmit(event) {
+        event.preventDefault();
+
+        let form = document.getElementById("add-languages-form");
+        let formData = new FormData(form);
+
+        fetch('http://localhost:3000/api/languages', {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(res => console.log(res))
+            .then(document.location.href = "./")
+            .catch(error => {
+                console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
+            });
+    }
+
+
     return (
         <div>
             {isConnected ? (
@@ -105,18 +152,44 @@ export default function Portfolio() {
                     <button onClick={() => handleOpenModal('B')}>Ajouter un projet</button>
                     <Modal
                         isOpen={isModalOpen}
-                        onClose={handleCloseModal}
                         title={modalType === 'A' ? 'Ajouter un langage' : 'Ajouter un projet'}
                         content={modalType === 'A' ?
-                            <div>
+                            <div className="language-modal">
+                                {formLanguage ? (
+                                    <div>
+                                        <div className="top-modal-form-language">
+                                            <div className="button-modal">
+                                                <button onClick={makeFormLanguagesDisapear}><i className="fa-solid fa-arrow-left"></i></button>
+                                                <button onClick={handleCloseModal} className="close-button">X</button>
+                                            </div>
+                                            <h2>Ajouter un langage</h2>
+                                        </div>
+                                        <div id="form-languages">
+                                            <form method='post' id="add-languages-form" onSubmit={handleFormLanguageSubmit} className="add-languages-form">
+                                                <label htmlFor='Name'>Nom du language</label>
+                                                <input type="text" id="languages-name" value={nameLanguage} onChange={(event) => setNameLanguage(event.target.value)} placeholder="Entrer le nom du language" name="Name" required></input>
+                                                <div className="upload-img-section">
+                                                    <img id="img-preview" src="#" alt=""></img>
+                                                    <label className="upload-image" htmlFor="upload-image">{imageLanguageUrl ? <img className="form-img-preview" src={imageLanguageUrl} alt='preview'></img> : <p className="upload-section"> <i className="fa-solid fa-cloud-arrow-up"></i> Veuillez upload un Logo</p>}</label>
+                                                    <input required type="file" onChange={handleImageLanguageChange} id="upload-image" name="image" accept="image/png, image/jpeg, image/webp"></input>
+                                                    <input type="submit" id='add-languages-form-submit' value='Créer le langage'></input>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>) : (<div className="modal-one-language">
+                                        <div className="modal-languages">
+                                            <button onClick={handleCloseModal} className="close-button">X</button>
+                                            <h2>Gérer les langage</h2>
+                                            <Languages></Languages>
+                                        </div>
+                                        <button onClick={makeFormLanguagesAppear}>Ajouter un langage</button>
+                                    </div>)}
 
                             </div> :
                             <div className="modal-projects">
-                                <div>
-                                    <Projects />
-                                </div>
-                                <button>Ajouter un projet</button>
-                                <div>
+                                {formProject ? (<div>
+                                    <button onClick={handleCloseModal} className="close-button">X</button>
+                                    <button onClick={makeFormProjectsDisapear}>X</button>
                                     <form method='post' id="add-projects-form" onSubmit={handleFormSubmit} className="add-projects-form">
                                         <label>Titre du projet</label>
                                         <input type="text" id="madd-projects-form-title" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Entrer le titre du projet" name="title" required></input>
@@ -143,7 +216,14 @@ export default function Portfolio() {
                                         {imageUrl ? <img src={imageUrl} alt='preview'></img> : <p> veuillez upload une image</p>}
                                         <input type="submit" id='add-projects-form-submit' value='Créer le projet'></input>
                                     </form>
-                                </div>
+                                </div>) : (<div>
+                                    <div>
+                                        <button onClick={handleCloseModal} className="close-button">X</button>
+
+                                        <Projects />
+                                    </div>
+                                    <button onClick={makeFormProjectsAppear}>Ajouter un projet</button>
+                                </div>)}
                             </div>
                         }
                     ></Modal>
