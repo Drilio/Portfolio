@@ -1,9 +1,12 @@
 const Project = require('../models/projects');
 const mongoose = require('mongoose')
+
+
 exports.createProject = (req, res, next) => {
     const projectObject = req.body;
     const regexTitle = /^[a-zA-Z0-9\s]+$/;
     const title = req.body.title
+    console.log(projectObject)
     if (regexTitle.test(title)) {
         const project = new Project({
             ...projectObject,
@@ -97,11 +100,12 @@ exports.getAllProjects = (req, res, next) => {
                 title: 1,
                 imageUrl: 1,
                 languagesUse: { $map: { input: '$languagesUse', as: 'lang', in: '$$lang.Name' } },
+                github: 1,
+                description: 1,
             },
         },
     ])
         .then(projects => {
-            console.log(projects);
             res.status(200).json(projects);
         })
         .catch(error => res.status(400).json({ error }));

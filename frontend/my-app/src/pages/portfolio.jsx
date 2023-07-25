@@ -10,7 +10,6 @@ export default function Portfolio() {
     const [isConnected, setIsConnected] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
     const [modalType, setModalType] = useState('A');
-    const [title, setTitle] = useState('')
     const [imageUrl, setImageUrl] = useState('');
     const [nameLanguage, setNameLanguage] = useState('')
     const [imageLanguageUrl, setImageLanguageUrl] = useState('');
@@ -206,7 +205,9 @@ export default function Portfolio() {
                                     <button onClick={makeFormProjectsDisapear}>X</button>
                                     <form method='post' id="add-projects-form" onSubmit={handleFormSubmit} className="add-projects-form">
                                         <label>Titre du projet</label>
-                                        <input type="text" id="madd-projects-form-title" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Entrer le titre du projet" name="title" required></input>
+                                        <input type="text" id="madd-projects-form-title" placeholder="Entrer le titre du projet" name="title" required></input>
+                                        <label>Lien GitHub</label>
+                                        <input type="url" name='github' placeholder="Entrer le lien Git du projet"></input>
                                         <fieldset>
                                             <legend>languages utilisé</legend>
                                             <div>
@@ -222,6 +223,8 @@ export default function Portfolio() {
                                                 )}
                                             </div>
                                         </fieldset>
+                                        <label htmlFor="description">Décrivez votre projet</label>
+                                        <input type='text' className='description-project' size="5" name="description" placeholder="Présentez ici votre projet en quelques lignes"></input>
                                         <div className="upload-img-section">
                                             <img id="img-preview" src="#" alt=""></img>
                                             <label htmlFor="upload-image">+ Ajouter photo</label>
@@ -243,21 +246,7 @@ export default function Portfolio() {
                     ></Modal>
                 </div>)
                 : ("")}
-            <div className='avaible-languages'>
-                <h2>Les languages existant sont les suivants</h2>
-                {languages.length > 0 && (
-                    <div className="languages">
-                        {languages.map(language => (
-                            <div className="language-button" key={language._id + "NameLogo"}>
-                                <button id={language.id} key={language._id}>{language.Name}</button>
-                                <img className="language-logo" src={language.imageUrl} alt="language-logo"></img>
-                            </div>
-                        ))}
-                    </div>
 
-
-                )}
-            </div>
             <Projects />
         </div>
     )

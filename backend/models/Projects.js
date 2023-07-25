@@ -5,6 +5,8 @@ const mongoose = require('mongoose')
 
 const projectShema = mongoose.Schema({
     title: { type: String, required: true },
+    github: { type: String, required: true },
+    description: { type: String },
     languagesId: [{ type: String }],
     imageUrl: { type: String }
 })

@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
+
 import "../style/projects.css"
 export default function Projects() {
 
@@ -12,6 +14,7 @@ export default function Projects() {
             .then(data => {
                 setProjects(data)
             })
+
     }
 
 
@@ -26,6 +29,7 @@ export default function Projects() {
                 <div className='projects-contener'>
                     {projects.map(project => (
                         <div className="project" key={project._id}>
+
                             <h3>{project.title}</h3>
                             <img src={project.imageUrl} alt="project-preview"></img>
                             {project.languagesUse.map(language => (
@@ -33,6 +37,7 @@ export default function Projects() {
                                     {language}
                                 </div>
                             ))}
+                            <Link to={`/project/${project._id}`}>En savoir plus</Link>
                         </div>
                     ))}
                 </div>

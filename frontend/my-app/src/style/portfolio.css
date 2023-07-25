@@ -113,3 +113,7 @@ button {
 .upload-img-section label {
     cursor: pointer;
 }
+
+input.description-project {
+    height: 100px;
+}

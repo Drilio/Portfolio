@@ -9,6 +9,7 @@ import Contacts from './pages/contacts';
 import Connection from './pages/connection';
 import Header from './components/Header';
 import Banner from './components/Banner';
+import ProjectDetails from './components/ProjectDetails';
 import './style/font.css';
 import "./style/index.css"
 
@@ -24,6 +25,7 @@ root.render(
         <Route path="/contacts" element={<Contacts />}></Route>
         <Route path="/portfolio" element={<Portfolio />}></Route>
         <Route path="/connection" element={<Connection />}></Route>
+        <Route path="/project/:id" element={<ProjectDetails />}></Route>
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>

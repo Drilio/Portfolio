@@ -5,6 +5,7 @@ import IsConnected from './AuthHelper';
 
 export default function Header() {
     const [isConnected, setIsConnected] = useState(false);
+    const [headerClassName, setHeaderClassName] = useState('');
 
     useEffect(() => {
         const token = window.localStorage.getItem('responseToken')
@@ -22,6 +23,24 @@ export default function Header() {
                 console.log("test isConnected false")
                 setIsConnected(false)
             });
+
+        //Detection du scroll pour mettre en page le header
+        function handleScroll() {
+            const targetElement = document.getElementById('your-target-element-id');
+            if (targetElement) {
+                const { top } = targetElement.getBoundingClientRect();
+                if (top <= 0) {
+                    console.log('User has scrolled to the precise point on the page');
+                    setHeaderClassName('scrolled');
+                } else {
+                    setHeaderClassName('');
+                }
+            }
+        }
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, [])
 
     function log() {
@@ -34,29 +53,25 @@ export default function Header() {
     }
 
     return (
-        <div className="header">
+        <div className={`header ${headerClassName}`}>
             <div className="top-header">
-                <nav className='nav-header'>
-                    <div>
+                <nav >
+                    <div className='nav-header'>
+                        <h1 id='header-name'>Antoine</h1>
                         <ul className='menu-link'>
-                            <li><NavLink to="/" id="home" className="">Accueil</NavLink></li>
-                            <li><NavLink to="/portfolio" id="projects" className="">Portfolio</NavLink></li>
-                            <li><NavLink to="/about" id="about" className="">A Propos</NavLink></li>
-                            <li><NavLink to="/contacts" id="contacts" className="">Contacts</NavLink></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <ul className='menu-connection'>
-                            <div>
+                            <li><NavLink to="/" id="home" className="">ACCUEIL</NavLink></li>
+                            <li><NavLink to="/portfolio" id="projects" className="">PORTFOLIO</NavLink></li>
+                            <li><NavLink to="/about" id="about" className="">A PROPOS</NavLink></li>
+                            <li><NavLink to="/contacts" id="contacts" className="">CONTACTS</NavLink></li>
+                            <li className='menu-connection'>
                                 {isConnected ? (
-                                    <li><NavLink to="/" id="log" onClick={log}>Déconnexion</NavLink></li>
+                                    <li><NavLink to="/" id="log" onClick={log}>DECONNEXION</NavLink></li>
                                 ) : (
-                                    <li><NavLink to="/connection" id="log" className="">Connexion</NavLink></li>
+                                    <li><NavLink to="/connection" id="log" className="">CONNEXION</NavLink></li>
                                 )}
-                            </div>
+                            </li>
                         </ul>
                     </div>
-
                 </nav>
             </div>
         </div>

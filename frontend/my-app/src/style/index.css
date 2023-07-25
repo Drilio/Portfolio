@@ -3,9 +3,10 @@ body {
     gap: 50px;
     width: 100%;
     flex-direction: column;
-    font-family: 'Poppins', sans-serif;
     background-color: #fff5d7;
     margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #292929;
 }
 
 #root {
