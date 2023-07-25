@@ -33,6 +33,10 @@ export default function Connection() {
                         return response.json();
                     }
                 })
+                .then(function () {
+                    // On envoie vers la page d'acueil
+                    document.location.href = "./";
+                })
                 .catch(function (error) {
                     console.log(error);
                     window.alert("Une erreur est survenue, veuillez réessayer");

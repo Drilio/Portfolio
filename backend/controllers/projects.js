@@ -2,23 +2,26 @@ const Project = require('../models/projects');
 const mongoose = require('mongoose')
 exports.createProject = (req, res, next) => {
     const projectObject = req.body;
-    // delete projectObject._id;
-    // delete projectObject.userId;
-    console.log(req.body)
-    const project = new Project({
-        ...projectObject,
-        // languagesId: JSON.parse(req.body.languagesId),
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    });
-    console.log(project)
+    const regexTitle = /^[a-zA-Z0-9\s]+$/;
+    const title = req.body.title
+    if (regexTitle.test(title)) {
+        const project = new Project({
+            ...projectObject,
+            title: title,
+            imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        });
+        console.log(project)
 
-    project.save()
-        .then(() => {
-            res.status(201).json({ message: 'Object enregistré !' });
-        })
-        .catch(() => {
-            res.status(400).json({ error });
-        })
+        project.save()
+            .then(() => {
+                res.status(201).json({ message: 'Object enregistré !' });
+            })
+            .catch(() => {
+                res.status(400).json({ error });
+            })
+    } else {
+        res.status(400).json({ error })
+    }
 }
 
 exports.modifyProject = (req, res, next) => {

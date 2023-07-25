@@ -7,8 +7,6 @@ import Error from './pages/error'
 import Portfolio from './pages/portfolio';
 import Contacts from './pages/contacts';
 import Connection from './pages/connection';
-import AddProjects from './pages/add-projects';
-import AddLanguages from './pages/add-languages';
 import Header from './components/Header';
 import Banner from './components/Banner';
 import './style/font.css';
@@ -26,8 +24,6 @@ root.render(
         <Route path="/contacts" element={<Contacts />}></Route>
         <Route path="/portfolio" element={<Portfolio />}></Route>
         <Route path="/connection" element={<Connection />}></Route>
-        <Route path="/add-projects" element={<AddProjects />}></Route>
-        <Route path="/add-languages" element={<AddLanguages />}></Route>
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>

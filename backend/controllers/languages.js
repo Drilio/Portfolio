@@ -1,23 +1,28 @@
 const language = require('../models/Languages');
 
 exports.createLanguage = (req, res, next) => {
-    const languageObject = req.body;
-    // delete languageObject._id;
-    // delete languageObject.userId;
     console.log(req.body)
-    const newObject = new language({
-        ...languageObject,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    });
-    console.log(newObject)
+    const name = req.body.Name
+    const regexName = /^[a-zA-Z0-9\s]+$/;
+    console.log(regexName.test(name))
+    if (regexName.test(name)) {
+        const newObject = new language({
+            Name: name,
+            imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        });
+        console.log(newObject)
 
-    newObject.save()
-        .then(() => {
-            res.status(201).json({ message: 'Object enregistré !' });
-        })
-        .catch(() => {
-            res.status(400).json({ error });
-        })
+        newObject.save()
+            .then(() => {
+                res.status(201).json({ message: 'Object enregistré !' });
+            })
+            .catch(() => {
+                res.status(400).json({ error });
+            })
+    } else {
+        res.status(400).json({ error })
+    }
+
 }
 
 exports.getAllLanguages = (req, res, next) => {

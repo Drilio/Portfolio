@@ -96,20 +96,28 @@ export default function Portfolio() {
 
         let form = document.getElementById('add-projects-form');
         let formData = new FormData(form);
+        let projectTitle = formData.get("title");
+        const regexTitle = /^[a-zA-Z0-9\s]+$/;
 
         checkboxesCheckId.forEach(id => {
             formData.append('languagesId', id);
         });
+        if (regexTitle.test(projectTitle)) {
+            fetch('http://localhost:3000/api/projects', {
+                method: "POST",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => console.log(res))
+                .then(document.location.href = "./portfolio")
+                .catch(error => {
+                    console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
+                });
+        } else {
+            alert("Veuillez entrer un titre valide (lettres, chiffres et espaces autorisés).");
+        }
 
-        fetch('http://localhost:3000/api/projects', {
-            method: "POST",
-            body: formData
-        })
-            .then(res => res.json())
-            .then(res => console.log(res))
-            .catch(error => {
-                console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
-            });
+
     }
 
     //Gestion du formulaire Langage
@@ -130,17 +138,24 @@ export default function Portfolio() {
 
         let form = document.getElementById("add-languages-form");
         let formData = new FormData(form);
-
-        fetch('http://localhost:3000/api/languages', {
-            method: "POST",
-            body: formData
-        })
-            .then(res => res.json())
-            .then(res => console.log(res))
-            .then(document.location.href = "./")
-            .catch(error => {
-                console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
-            });
+        let languageName = formData.get("Name");
+        console.log(languageName)
+        // Regex pour valider le nom de la langue (lettres, chiffres et espaces autorisés)
+        const regexName = /^[a-zA-Z0-9\s]+$/;
+        if (regexName.test(languageName)) {
+            fetch('http://localhost:3000/api/languages', {
+                method: "POST",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => console.log(res))
+                .then(document.location.href = "./portfolio")
+                .catch(error => {
+                    console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
+                });
+        } else if (!regexName.test(languageName)) {
+            alert("Veuillez entrer un nom de langue valide (lettres, chiffres et espaces autorisés).");
+        }
     }
 
 
@@ -152,7 +167,6 @@ export default function Portfolio() {
                     <button onClick={() => handleOpenModal('B')}>Ajouter un projet</button>
                     <Modal
                         isOpen={isModalOpen}
-                        title={modalType === 'A' ? 'Ajouter un langage' : 'Ajouter un projet'}
                         content={modalType === 'A' ?
                             <div className="language-modal">
                                 {formLanguage ? (

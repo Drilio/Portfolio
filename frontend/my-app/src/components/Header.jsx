@@ -54,12 +54,6 @@ export default function Header() {
                                     <li><NavLink to="/connection" id="log" className="">Connexion</NavLink></li>
                                 )}
                             </div>
-
-                            <div className='edit'>
-                                <li><NavLink to="/add-projects" id="addprojects" className="">Ajouter un projet</NavLink></li>
-                                <li><NavLink to="/add-languages" id='addlanguage'>Ajouter un language</NavLink></li>
-                            </div>
-
                         </ul>
                     </div>
 
