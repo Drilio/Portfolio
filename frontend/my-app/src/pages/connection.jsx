@@ -9,14 +9,13 @@ export default function Connection() {
         let email = event.target.querySelector("[name=email]").value
         let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        //Le nom d'utilisateur doit contenir uniquement des lettres minuscules et majuscules, des chiffres et éventuellement des tirets ou des underscores. Il ne peut pas commencer ou se terminer par un tiret ou un underscore, et ne peut pas en avoir deux consécutifs.
+        //Les caractères spéciaux, les pseudos uniquement avec des chiffres, et les pseudo de moins de 3 caractère et de plus de 20 sont interdis
         let name = event.target.querySelector("[name=username]").value
-        let nameRegex = /^[a-zA-Z0-9](?!.*--|__)[a-zA-Z0-9-_]+$/;
+        let nameRegex = /^[a-zA-Z]{1,20}\d{0,3}$/;
         //Le mot de passe doit avoir une longueur minimale de caractères, par exemple, au moins 8 caractères & Il doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre.
         let password = event.target.querySelector("[name=password]").value
         let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*]{8,}$/
         if (emailRegex.test(email) && nameRegex.test(name) && passwordRegex.test(password)) {
-            console.log("testRegex")
             let user = {
                 email: email,
                 password: password,
@@ -52,10 +51,13 @@ export default function Connection() {
         event.preventDefault()
         let email = event.target.querySelector("[name=email]").value
         let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (emailRegex.test(email)) {
+        let password = event.target.querySelector("[name=password]").value
+        let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*]{8,}$/
+
+        if (emailRegex.test(email) && passwordRegex.test(password)) {
             let user = {
                 email: event.target.querySelector("[name=email]").value,
-                password: event.target.querySelector("[name=password]").value,
+                password: password,
             }
             // Création de la charge utile au format JSON
             let chargeUtile = JSON.stringify(user);
@@ -91,10 +93,11 @@ export default function Connection() {
                     console.log(error);
                     window.alert("Veuillez entrez des id corrects")
                 });
-        } else {
-            window.alert("Veuillez entrez une adresse mail valide")
+        } else if (emailRegex.test(email) === false) {
+            window.alert("Veuillez entrer une adresse mail valide");
+        } else if (passwordRegex.test(password) === false) {
+            window.alert("Veuillez entrer un mot de passe contenant une lettre majuscule, une minuscule et un chiffre");
         }
-
 
     }
 
