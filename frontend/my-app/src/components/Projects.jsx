@@ -35,7 +35,7 @@ export default function Projects() {
                                 <div className='overlay'>
                                     <div className='test-overlay'>
                                         <h3 className='title-project'>{project.title}</h3>
-                                        {project.languagesUse?.map(language => (
+                                        {project.languagesUse.map(language => (
                                             <p className='project-name' key={`${project._id}-${language}`}>
                                                 {language}
                                             </p>
