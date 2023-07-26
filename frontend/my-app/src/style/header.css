@@ -26,6 +26,10 @@
     pointer-events: none;
 }
 
+.header.scrolled::before {
+    background: none;
+}
+
 .header.scrolled {
     padding: 25px 35px;
     background: #ffffff;

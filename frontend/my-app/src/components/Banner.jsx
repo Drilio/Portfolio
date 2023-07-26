@@ -5,6 +5,7 @@ import TypingAnimation from './TypingAnimation';
 export default function Banner() {
     const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
     const textsArray = ['Portfolio', 'Web Dev']
+
     useEffect(() => {
         function handleResize() {
             setImageSize({ width: '100%', height: window.innerHeight });
