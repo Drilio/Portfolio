@@ -24,20 +24,26 @@ export default function Projects() {
 
 
     return (
-        <div>
+        <div className='section-projects'>
+            <h2>Traveaux Récents</h2>
             {projects.length > 0 && (
                 <div className='projects-contener'>
                     {projects.map(project => (
                         <div className="project" key={project._id}>
-
-                            <h3>{project.title}</h3>
                             <img src={project.imageUrl} alt="project-preview"></img>
-                            {project.languagesUse.map(language => (
-                                <div key={`${project._id}-${language}`}>
-                                    {language}
+                            <Link to={`/project/${project._id}`}>
+                                <div className='overlay'>
+                                    <div className='test-overlay'>
+                                        <h3 className='title-project'>{project.title}</h3>
+                                        {project.languagesUse?.map(language => (
+                                            <p className='project-name' key={`${project._id}-${language}`}>
+                                                {language}
+                                            </p>
+                                        ))}
+                                    </div>
+
                                 </div>
-                            ))}
-                            <Link to={`/project/${project._id}`}>En savoir plus</Link>
+                            </Link>
                         </div>
                     ))}
                 </div>
