@@ -159,7 +159,7 @@ export default function Portfolio() {
 
 
     return (
-        <div>
+        <div className="portfolio-main">
             {isConnected ? (
                 <div className="add-projects-languages">
                     <button onClick={() => handleOpenModal('A')}>Ajouter un langage</button>

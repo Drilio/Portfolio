@@ -6,6 +6,7 @@ import IsConnected from './AuthHelper';
 export default function Header() {
     const [isConnected, setIsConnected] = useState(false);
     const [headerClassName, setHeaderClassName] = useState('');
+    const [menuStyle, setMenuStyle] = useState({ display: 'none', })
 
     useEffect(() => {
         const token = window.localStorage.getItem('responseToken')
@@ -32,8 +33,10 @@ export default function Header() {
                 if (top <= 0) {
                     console.log('User has scrolled to the precise point on the page');
                     setHeaderClassName('scrolled');
+                    setMenuStyle({ display: 'flex' })
                 } else {
                     setHeaderClassName('');
+                    setMenuStyle({ display: 'none' });
                 }
             }
         }
@@ -58,7 +61,7 @@ export default function Header() {
                 <nav >
                     <div className='nav-header'>
                         <h1 id='header-name'>Antoine</h1>
-                        <ul className='menu-link'>
+                        <ul className='menu-link' style={menuStyle}>
                             <li><NavLink to="/" id="home" className="">ACCUEIL</NavLink></li>
                             <li><NavLink to="/portfolio" id="projects" className="">PORTFOLIO</NavLink></li>
                             <li><NavLink to="/about" id="about" className="">A PROPOS</NavLink></li>

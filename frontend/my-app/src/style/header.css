@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100% - 65px);
     z-index: 20;
     opacity: 1;
     visibility: visible;
@@ -46,6 +46,8 @@
 .menu-link {
     display: flex;
     gap: 20px;
+    line-height: 46px;
+    align-items: center;
 }
 
 .edit {

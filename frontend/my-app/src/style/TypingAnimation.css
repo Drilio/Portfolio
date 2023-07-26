@@ -1,0 +1,6 @@
+.typed-title {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 100px;
+    border-right: 0.15em solid white;
+}
