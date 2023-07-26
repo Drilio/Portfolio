@@ -1,5 +1,8 @@
 .portfolio-main {
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
 }
 
 .add-projects-languages {

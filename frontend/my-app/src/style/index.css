@@ -1,9 +1,8 @@
 body {
     display: flex;
-    gap: 50px;
     width: 100%;
     flex-direction: column;
-    background-color: #fff5d7;
+    background-color: #FFFFFF;
     margin: 0;
     font-family: 'Poppins', sans-serif;
     color: #292929;
@@ -13,5 +12,5 @@ body {
 #root {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 100px;
 }

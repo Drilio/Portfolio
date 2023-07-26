@@ -27,6 +27,13 @@ export default function Banner() {
                 <div className="type-writing-container">
                     <h1><TypingAnimation texts={textsArray} delay={100} /></h1>
                 </div>
+                <div className='social-media'>
+                    <ul className='list-social-media'>
+                        <li><i class="fa-brands fa-twitter"></i></li>
+                        <li><i class="fa-brands fa-github"></i></li>
+                        <li><i class="fa-brands fa-linkedin"></i></li>
+                    </ul>
+                </div>
             </div>
         </div>
 

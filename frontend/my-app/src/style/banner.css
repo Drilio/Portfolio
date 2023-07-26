@@ -2,17 +2,18 @@
     background: linear-gradient(rgba(0, 0, 0, 0.2),
             rgba(0, 0, 0, 0.2)),
         url("../images/Banner.jpg");
-    height: 250px;
     background-size: cover;
     background-position: center;
-    display: flex;
     justify-content: center;
     align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .banner h1 {
     color: white;
     font-size: 100px;
+    min-height: 200px;
 }
 
 /* Type writting effect */
@@ -29,4 +30,12 @@
 
 .type-writing-container {
     display: inline-block;
+}
+
+.list-social-media {
+    display: flex;
+    gap: 25px;
+    color: white;
+    list-style-type: none;
+    font-size: 25px;
 }

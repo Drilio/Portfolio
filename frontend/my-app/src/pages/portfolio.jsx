@@ -4,6 +4,7 @@ import "../style/portfolio.css"
 import IsConnected from '../components/AuthHelper';
 import Modal from '../components/Modal';
 import Languages from "../components/Languages";
+import AboutMe from "../components/AboutMe";
 
 export default function Portfolio() {
     const [languages, setLanguages] = useState([])
@@ -160,6 +161,9 @@ export default function Portfolio() {
 
     return (
         <div className="portfolio-main">
+            <div>
+                <AboutMe />
+            </div>
             {isConnected ? (
                 <div className="add-projects-languages">
                     <button onClick={() => handleOpenModal('A')}>Ajouter un langage</button>
@@ -195,7 +199,7 @@ export default function Portfolio() {
                                             <h2>Gérer les langage</h2>
                                             <Languages></Languages>
                                         </div>
-                                        <button onClick={makeFormLanguagesAppear}>Ajouter un langage</button>
+                                        <button onClick={makeFormLanguagesAppear}>Ajouter un langage </button>
                                     </div>)}
 
                             </div> :

@@ -12,14 +12,14 @@ const TypingAnimation = ({ texts }) => {
 
         if (isErasing) {
             if (currentText.length === 0) {
-                // Quand on a finit d'effacer, on écrit le texte suivant
+                // Quand on a fini d'effacer, on passe à l'écriture du texte suivant
                 setIsErasing(false);
                 setCurrentIndex(prevIndex => (prevIndex + 1) % texts.length);
             }
         } else {
             if (currentText === textToType) {
-                // Une fois finis d'ecrire on efface après X millisecondes
-                setTimeout(() => setIsErasing(true), 5000);;
+                // Une fois finis d'écrire, on efface après X millisecondes
+                setTimeout(() => setIsErasing(true), 5000);
             }
         }
 
