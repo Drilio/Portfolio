@@ -112,8 +112,52 @@ exports.getAllProjects = (req, res, next) => {
 };
 
 exports.getOneProject = (req, res, next) => {
-    Project.findOne({ _id: req.params.id })
-        .then(project => res.status(200).json(project))
+    const projectId = req.params.id
+    Project.aggregate([
+        {
+            $match: { _id: new mongoose.Types.ObjectId(projectId) }
+        },
+        {
+            $addFields: {
+                convertedLanguageIds: {
+                    $map: {
+                        input: '$languagesId',
+                        as: 'languageId',
+                        in: {
+                            $convert: {
+                                input: { $toObjectId: '$$languageId' },
+                                to: 'objectId',
+                                onError: null,
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        {
+            $lookup: {
+                from: 'languages',
+                localField: 'convertedLanguageIds',
+                foreignField: '_id',
+                as: 'languagesUse',
+            },
+        },
+        {
+            $project: {
+                title: 1,
+                imageUrl: 1,
+                languagesUse: { $map: { input: '$languagesUse', as: 'lang', in: '$$lang.Name' } },
+                github: 1,
+                description: 1,
+            },
+        },
+    ])
+        .then(project => {
+            if (project.length === 0) {
+                return res.status(404).json({ message: 'Le projet n\'a pas été trouvé' });
+            }
+            res.status(200).json(project[0]);
+        })
         .catch(error => res.status(404).json({ error }));
 }
 

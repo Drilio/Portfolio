@@ -56,7 +56,7 @@ export default function Header() {
     }
 
     return (
-        <div className={`header ${headerClassName}`}>
+        <div id='header' className={`header ${headerClassName}`}>
             <div className="top-header">
                 <nav >
                     <div className='nav-header'>
@@ -66,13 +66,13 @@ export default function Header() {
                             <li><NavLink to="/portfolio" id="projects" className="">PORTFOLIO</NavLink></li>
                             <li><NavLink to="/about" id="about" className="">A PROPOS</NavLink></li>
                             <li><NavLink to="/contacts" id="contacts" className="">CONTACTS</NavLink></li>
-                            <li className='menu-connection'>
+                            <ul className='menu-connection'>
                                 {isConnected ? (
                                     <li><NavLink to="/" id="log" onClick={log}>DECONNEXION</NavLink></li>
                                 ) : (
                                     <li><NavLink to="/connection" id="log" className="">CONNEXION</NavLink></li>
                                 )}
-                            </li>
+                            </ul>
                         </ul>
                     </div>
                 </nav>

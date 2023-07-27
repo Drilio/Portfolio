@@ -5,6 +5,7 @@ import IsConnected from '../components/AuthHelper';
 import Modal from '../components/Modal';
 import Languages from "../components/Languages";
 import AboutMe from "../components/AboutMe";
+import ContactForm from "../components/ContactForm";
 
 export default function Portfolio() {
     const [languages, setLanguages] = useState([])
@@ -60,10 +61,14 @@ export default function Portfolio() {
     const handleOpenModal = (type) => {
         setModalType(type);
         setModalOpen(true);
+        let header = document.getElementById('header')
+        header.style.display = "none"
     };
 
     const handleCloseModal = () => {
         setModalOpen(false);
+        let header = document.getElementById('header')
+        header.style.display = ""
     };
 
     // On fait en sorte d'avoir une prévisualisation de l'image (ici on créé l'URL)
@@ -252,6 +257,7 @@ export default function Portfolio() {
                 : ("")}
 
             <Projects />
+            <ContactForm />
         </div>
     )
 }

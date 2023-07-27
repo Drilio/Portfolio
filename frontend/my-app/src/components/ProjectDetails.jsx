@@ -14,6 +14,9 @@ export default function ProjectDetails() {
             .then(data => {
                 setProject(data)
                 console.log(data)
+            })
+            .catch(error => {
+                console.error('Error fetching project data:', error);
             });
     }, [id]);
 
@@ -23,20 +26,29 @@ export default function ProjectDetails() {
     }, [fetchProjectData])
 
     return (
-        <div className='project-detail-name' >
+        <div className='project-detail' >
             {project ? (
                 <div className='project-article-main'>
                     <h2>{project.title}</h2>
                     <div className='project-language-container'>
-                        {project.languagesUse?.map(language => (
-                            <p className='project-language' key={`${project._id}-${language}`}>
-                                {language}
-                            </p>
-                        ))}
+                        {Array.isArray(project.languagesUse) ? (
+                            <ul>
+                                {project.languagesUse.map(language => (
+                                    <li className='project-language' key={`${project._id}-${language}`}>{language}</li>
+                                ))}
+                            </ul>
+
+                        ) : (
+                            <p>No languages specified for this project.</p>
+                        )}
                     </div>
+
 
                     <div className='article-img'>
                         <img src={project.imageUrl} alt="project-preview"></img>
+                    </div>
+                    <div className='project-description'>
+                        <p>{project.description}</p>
                     </div>
                 </div>
             ) : (

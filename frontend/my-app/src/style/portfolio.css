@@ -89,6 +89,10 @@ button {
     background-image: linear-gradient(-180deg, #1D95C9 0%, #17759C 100%);
 }
 
+.section-projects {
+    z-index: 0;
+}
+
 .form-img-preview {
     height: 300px;
 }

@@ -19,7 +19,7 @@ const TypingAnimation = ({ texts }) => {
         } else {
             if (currentText === textToType) {
                 // Une fois finis d'écrire, on efface après X millisecondes
-                setTimeout(() => setIsErasing(true), 5000);
+                setTimeout(() => setIsErasing(true), 7500);
             }
         }
 
