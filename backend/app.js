@@ -8,6 +8,7 @@ const path = require('path');
 const userRoutes = require('./routes/user');
 const projectRoutes = require('./routes/Projects');
 const languagesRoutes = require('./routes/languages');
+const sendRoutes = require('./routes/send');
 
 mongoose.connect('mongodb+srv://antoineroy92:test123@clustervieuxgrimoire.wfdhr4u.mongodb.net/portfolio',
     {
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 app.use('/api/auth', userRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/languages', languagesRoutes);
+app.use('/api/send', sendRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 module.exports = app;
