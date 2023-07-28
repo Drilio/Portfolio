@@ -1,3 +1,4 @@
+import '../style/contactForm.css'
 export default function ContactForm() {
 
     function handleSubmit(event) {
@@ -8,7 +9,7 @@ export default function ContactForm() {
         let name = event.target.querySelector("[name=name]").value;
         let nameRegex = /^[a-zA-Z]{1,20}\d{0,3}$/;
         let message = event.target.querySelector('[name=message]').value;
-        let regexMessage = /^[a-zA-Z0-9\s.,!?'"()\-]*$/;
+        let regexMessage = /^[a-zA-Z0-9\s.,!?'"()-]*$/;
         // Regex pour valider le nom de la langue (lettres, chiffres et espaces autorisés)
         if (nameRegex.test(name) && emailRegex.test(email) && regexMessage.test(message)) {
             let body = {
@@ -39,21 +40,19 @@ export default function ContactForm() {
         }
     }
     return (
-        <form id="contact-form" onSubmit={handleSubmit} method="POST">
-            <div className="form-group">
+        <div className="form-container">
+            <h3 className="title-form">Me Contacter</h3>
+            <form id="contact-form" onSubmit={handleSubmit} method="POST">
                 <label htmlFor="name">Name</label>
-                <input name="name" type="text" className="form-control" />
-            </div>
-            <div className="form-group">
+                <input name="name" placeholder="Name*" type="text" className="form-control" required />
                 <label htmlFor="exampleInputEmail1">Email address</label>
-                <input name="email" type="email" className="form-control" aria-describedby="emailHelp" />
-            </div>
-            <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea name="message" className="form-control" rows="5"></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+                <input name="email" placeholder="Email*" type="email" className="form-control" aria-describedby="emailHelp" required />
+                <label htmlFor="message" required>Message</label>
+                <textarea name="message" placeholder='Message*' className="form-control" rows="5"></textarea>
+                <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
     )
 
 }

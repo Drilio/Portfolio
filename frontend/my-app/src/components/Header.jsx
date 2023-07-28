@@ -62,15 +62,15 @@ export default function Header() {
                     <div className='nav-header'>
                         <h1 id='header-name'>Antoine</h1>
                         <ul className='menu-link' style={menuStyle}>
-                            <li><NavLink to="/" id="home" className="">ACCUEIL</NavLink></li>
-                            <li><NavLink to="/portfolio" id="projects" className="">PORTFOLIO</NavLink></li>
-                            <li><NavLink to="/about" id="about" className="">A PROPOS</NavLink></li>
-                            <li><NavLink to="/contacts" id="contacts" className="">CONTACTS</NavLink></li>
+                            <li><NavLink to="/" id="home" className="header-link">ACCUEIL</NavLink></li>
+                            <li><NavLink to="/portfolio" id="projects" className="header-link">PORTFOLIO</NavLink></li>
+                            <li><NavLink to="/about" id="about" className="header-link">A PROPOS</NavLink></li>
+                            <li><NavLink to="/contacts" id="contacts" className="header-link">CONTACTS</NavLink></li>
                             <ul className='menu-connection'>
                                 {isConnected ? (
-                                    <li><NavLink to="/" id="log" onClick={log}>DECONNEXION</NavLink></li>
+                                    <li><NavLink to="/" id="log" className="header-link" onClick={log}>DECONNEXION</NavLink></li>
                                 ) : (
-                                    <li><NavLink to="/connection" id="log" className="">CONNEXION</NavLink></li>
+                                    <li><NavLink to="/connection" id="log" className="header-link">CONNEXION</NavLink></li>
                                 )}
                             </ul>
                         </ul>

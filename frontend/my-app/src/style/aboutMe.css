@@ -15,7 +15,7 @@ h2 {
 .about-me-main {
     display: flex;
     gap: 40px;
-    justify-content: center;
+    margin: 0 40px 0 40px
 }
 
 .about-me-presentation {
@@ -34,7 +34,8 @@ h2 {
     font-weight: 300;
 }
 
-a {
+.header-link,
+.link-download {
     text-decoration: none;
     padding: 2px 0 0 0;
     display: inline-block;
@@ -43,7 +44,6 @@ a {
     color: #292929;
     letter-spacing: 0.2em;
     font-weight: 500;
-    line-height: 12px;
     text-transform: uppercase;
     cursor: pointer;
     box-shadow: inset 0 -6px 0 #fdd912;
@@ -56,7 +56,8 @@ a {
     -o-transition: all 0.4s ease 0s;
 }
 
-a:hover {
+.header-link:hover,
+.link-download:hover {
     box-shadow: inset 0 -14px 0 #fdd912;
     -moz-box-shadow: inset 0 -14px 0 #fdd912;
     -webkit-box-shadow: inset 0 -14px 0 #fdd912;

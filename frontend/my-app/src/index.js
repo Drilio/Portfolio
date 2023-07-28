@@ -10,6 +10,7 @@ import Connection from './pages/connection';
 import Header from './components/Header';
 import Banner from './components/Banner';
 import ProjectDetails from './components/ProjectDetails';
+import Footer from './components/Footer';
 import './style/font.css';
 import "./style/index.css"
 
@@ -28,6 +29,7 @@ root.render(
         <Route path="/project/:id" element={<ProjectDetails />}></Route>
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </Router>
   </React.StrictMode>
 );

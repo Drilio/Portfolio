@@ -68,29 +68,38 @@
 }
 
 button {
-    background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
-    border-radius: .5rem;
-    box-sizing: border-box;
-    color: #FFFFFF;
-    display: flex;
-    font-size: 16px;
-    justify-content: center;
-    padding: 1rem 1.75rem;
     text-decoration: none;
-    /* width: 100%; */
-    border: 0;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    color: #292929;
+    letter-spacing: 0.2em;
+    font-weight: 500;
+    line-height: 12px;
+    text-transform: uppercase;
     cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+    box-shadow: inset 0 -6px 0 #fdd912;
+    -moz-box-shadow: inset 0 -6px 0 #fdd912;
+    -webkit-box-shadow: inset 0 -6px 0 #fdd912;
+    -khtml-box-shadow: inset 0 -6px 0 #fdd912;
+    transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    text-decoration: none;
+    border: none;
 }
 
 .button-43:hover {
-    background-image: linear-gradient(-180deg, #1D95C9 0%, #17759C 100%);
+    box-shadow: inset 0 -14px 0 #fdd912;
+    -moz-box-shadow: inset 0 -14px 0 #fdd912;
+    -webkit-box-shadow: inset 0 -14px 0 #fdd912;
+    -khtml-box-shadow: inset 0 -14px 0 #fdd912;
 }
 
 .section-projects {
     z-index: 0;
+    margin: 0 40px 0 40px
 }
 
 .form-img-preview {
