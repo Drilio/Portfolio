@@ -171,8 +171,8 @@ export default function Portfolio() {
             </div>
             {isConnected ? (
                 <div className="add-projects-languages">
-                    <button onClick={() => handleOpenModal('A')}>Ajouter un langage</button>
-                    <button onClick={() => handleOpenModal('B')}>Ajouter un projet</button>
+                    <button className='button-open-modal' onClick={() => handleOpenModal('A')}>Ajouter un langage</button>
+                    <button className='button-open-modal' onClick={() => handleOpenModal('B')}>Ajouter un projet</button>
                     <Modal
                         isOpen={isModalOpen}
                         content={modalType === 'A' ?
@@ -181,7 +181,7 @@ export default function Portfolio() {
                                     <div>
                                         <div className="top-modal-form-language">
                                             <div className="button-modal">
-                                                <button onClick={makeFormLanguagesDisapear}><i className="fa-solid fa-arrow-left"></i></button>
+                                                <button className="close-button" onClick={makeFormLanguagesDisapear}><i className="fa-solid fa-arrow-left"></i></button>
                                                 <button onClick={handleCloseModal} className="close-button">X</button>
                                             </div>
                                             <h2>Ajouter un langage</h2>
@@ -191,7 +191,6 @@ export default function Portfolio() {
                                                 <label htmlFor='Name'>Nom du language</label>
                                                 <input type="text" id="languages-name" value={nameLanguage} onChange={(event) => setNameLanguage(event.target.value)} placeholder="Entrer le nom du language" name="Name" required></input>
                                                 <div className="upload-img-section">
-                                                    <img id="img-preview" src="#" alt=""></img>
                                                     <label className="upload-image" htmlFor="upload-image">{imageLanguageUrl ? <img className="form-img-preview" src={imageLanguageUrl} alt='preview'></img> : <p className="upload-section"> <i className="fa-solid fa-cloud-arrow-up"></i> Veuillez upload un Logo</p>}</label>
                                                     <input required type="file" onChange={handleImageLanguageChange} id="upload-image" name="image" accept="image/png, image/jpeg, image/webp"></input>
                                                     <input type="submit" id='add-languages-form-submit' value='Créer le langage'></input>

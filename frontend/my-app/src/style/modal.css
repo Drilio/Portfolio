@@ -27,3 +27,10 @@
     padding: 50px;
     max-height: -webkit-fill-available;
 }
+
+.close-button {
+    width: 15px;
+    background-color: #fff;
+    -webkit-box-shadow: none;
+    font-weight: bold;
+}

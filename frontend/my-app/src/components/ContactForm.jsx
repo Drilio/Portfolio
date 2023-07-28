@@ -49,7 +49,7 @@ export default function ContactForm() {
                 <input name="email" placeholder="Email*" type="email" className="form-control" aria-describedby="emailHelp" required />
                 <label htmlFor="message" required>Message</label>
                 <textarea name="message" placeholder='Message*' className="form-control" rows="5"></textarea>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Envoyer</button>
             </form>
         </div>
 
