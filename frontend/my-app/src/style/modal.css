@@ -22,7 +22,8 @@
     border-radius: 20px;
 }
 
-.language-modal {
+.language-modal,
+.modal-projects {
     overflow: auto;
     padding: 50px;
     max-height: -webkit-fill-available;

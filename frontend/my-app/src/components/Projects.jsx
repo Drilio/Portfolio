@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 
 import "../style/projects.css"
-export default function Projects() {
+export default function Projects({ filtersNames }) {
 
     const [projects, setProjects] = useState([])
 
@@ -25,7 +25,18 @@ export default function Projects() {
 
     return (
         <div className='section-projects'>
+
             <h2>Traveaux Récents</h2>
+            <div className='filters-projects'>
+                <div>
+                    <button className='filters'>Tous</button>
+                </div>
+                {filtersNames.map(name => (
+                    <div className="language" key={name + 'filters'}>
+                        <button className='filters'>{name}</button>
+                    </div>
+                ))}
+            </div>
             {projects.length > 0 && (
                 <div className='projects-contener'>
                     {projects.map(project => (

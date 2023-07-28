@@ -6,6 +6,8 @@ import Modal from '../components/Modal';
 import Languages from "../components/Languages";
 import AboutMe from "../components/AboutMe";
 import ContactForm from "../components/ContactForm";
+import Banner from '../components/Banner';
+
 
 export default function Portfolio() {
     const [languages, setLanguages] = useState([])
@@ -17,6 +19,7 @@ export default function Portfolio() {
     const [imageLanguageUrl, setImageLanguageUrl] = useState('');
     const [formProject, setFormProject] = useState(false)
     const [formLanguage, setFormLanguage] = useState(false)
+    const [filtersNames, setFiltersNames] = useState([])
 
 
     //verficiation de la connexion
@@ -46,6 +49,8 @@ export default function Portfolio() {
             })
             .then(data => {
                 setLanguages(data)
+                const languageNames = data.map(language => language.Name);
+                setFiltersNames(languageNames);
             })
             .catch(error => {
                 console.error('Error fetching languages:', error);
@@ -114,7 +119,7 @@ export default function Portfolio() {
             })
                 .then(res => res.json())
                 .then(res => console.log(res))
-                .then(document.location.href = "./portfolio")
+                .then(document.location.href = "./")
                 .catch(error => {
                     console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
                 });
@@ -144,7 +149,6 @@ export default function Portfolio() {
         let form = document.getElementById("add-languages-form");
         let formData = new FormData(form);
         let languageName = formData.get("Name");
-        console.log(languageName)
         // Regex pour valider le nom de la langue (lettres, chiffres et espaces autorisés)
         const regexName = /^[a-zA-Z0-9\s]+$/;
         if (regexName.test(languageName)) {
@@ -162,10 +166,12 @@ export default function Portfolio() {
             alert("Veuillez entrer un nom de langue valide (lettres, chiffres et espaces autorisés).");
         }
     }
+    console.log("Languages prop in ParentComponent:", filtersNames);
 
 
     return (
         <div className="portfolio-main">
+            <Banner />
             <div>
                 <AboutMe />
             </div>
@@ -203,7 +209,7 @@ export default function Portfolio() {
                                             <h2>Gérer les langage</h2>
                                             <Languages></Languages>
                                         </div>
-                                        <button onClick={makeFormLanguagesAppear}>Ajouter un langage </button>
+                                        <button className="button-add-language" onClick={makeFormLanguagesAppear}>Ajouter un langage </button>
                                     </div>)}
 
                             </div> :
@@ -244,8 +250,6 @@ export default function Portfolio() {
                                 </div>) : (<div>
                                     <div>
                                         <button onClick={handleCloseModal} className="close-button">X</button>
-
-                                        <Projects />
                                     </div>
                                     <button onClick={makeFormProjectsAppear}>Ajouter un projet</button>
                                 </div>)}
@@ -255,7 +259,7 @@ export default function Portfolio() {
                 </div>)
                 : ("")}
 
-            <Projects />
+            <Projects filtersNames={filtersNames} />
             <ContactForm />
         </div>
     )

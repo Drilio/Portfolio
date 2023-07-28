@@ -1,5 +1,6 @@
 import "../style/connection.css"
 import { useState } from 'react'
+import Banner from "../components/Banner"
 
 export default function Connection() {
     const [login, setLogin] = useState()
@@ -108,6 +109,7 @@ export default function Connection() {
     return (
 
         <div>
+            <Banner />
             <div className="connection-form">
                 <h2>CONNEXION</h2>
                 <form id="my-connection-form" onSubmit={userLogin}>

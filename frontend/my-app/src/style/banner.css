@@ -1,4 +1,5 @@
-.banner {
+.banner,
+.banner-project {
     background: linear-gradient(rgba(0, 0, 0, 0.2),
             rgba(0, 0, 0, 0.2)),
         url("../images/Banner.jpg");
@@ -11,10 +12,19 @@
     height: 100vh;
 }
 
-.banner h1 {
+.banner-project {
+    height: 400px;
+}
+
+.banner h1,
+.banner-project h1 {
     color: white;
     font-size: 100px;
     min-height: 200px;
+}
+
+.banner-project h1 {
+    min-height: 170px;
 }
 
 /* Type writting effect */

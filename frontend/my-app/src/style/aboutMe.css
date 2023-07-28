@@ -36,7 +36,8 @@ h2 {
 
 .header-link,
 .link-download,
-.button-open-modal {
+.button-open-modal,
+.button-add-language {
     text-decoration: none;
     padding: 2px 0 0 0;
     display: inline-block;
@@ -60,7 +61,8 @@ h2 {
 
 .header-link:hover,
 .link-download:hover,
-.button-open-modal:hover {
+.button-open-modal:hover,
+.button-add-language:hover {
     box-shadow: inset 0 -14px 0 #fdd912;
     -moz-box-shadow: inset 0 -14px 0 #fdd912;
     -webkit-box-shadow: inset 0 -14px 0 #fdd912;

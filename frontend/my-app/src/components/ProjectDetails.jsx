@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import '../style/projectDetails.css'
+import BannerProject from './BannerProject';
 
 export default function ProjectDetails() {
     const { id } = useParams();
@@ -25,35 +26,47 @@ export default function ProjectDetails() {
         fetchProjectData()
     }, [fetchProjectData])
 
+    console.log(project)
+
     return (
-        <div className='project-detail' >
+        <div>
             {project ? (
-                <div className='project-article-main'>
-                    <h2>{project.title}</h2>
-                    <div className='project-language-container'>
-                        {Array.isArray(project.languagesUse) ? (
-                            <ul>
-                                {project.languagesUse.map(language => (
-                                    <li className='project-language' key={`${project._id}-${language}`}>{language}</li>
-                                ))}
-                            </ul>
+                <>
+                    <BannerProject projectTitle={project.title} />
+                </>
+            ) : ('')
 
-                        ) : (
-                            <p>No languages specified for this project.</p>
-                        )}
-                    </div>
+            }
+            <div className='project-detail' >
+                {project ? (
+                    <div className='project-article-main'>
+                        <h2>{project.title}</h2>
+                        <div className='project-language-container'>
+                            {Array.isArray(project.languagesUse) ? (
+                                <ul>
+                                    {project.languagesUse.map(language => (
+                                        <li className='project-language' key={`${project._id}-${language}`}>{language}</li>
+                                    ))}
+                                </ul>
+
+                            ) : (
+                                <p>No languages specified for this project.</p>
+                            )}
+                        </div>
 
 
-                    <div className='article-img'>
-                        <img src={project.imageUrl} alt="project-preview"></img>
+                        <div className='article-img'>
+                            <img src={project.imageUrl} alt="project-preview"></img>
+                        </div>
+                        <div className='project-description'>
+                            <p>{project.description}</p>
+                        </div>
                     </div>
-                    <div className='project-description'>
-                        <p>{project.description}</p>
-                    </div>
-                </div>
-            ) : (
-                <p>Loading...</p>
-            )}
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </div>
         </div>
+
     )
 }
