@@ -2,6 +2,8 @@ import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import '../style/projectDetails.css'
 import BannerProject from './BannerProject';
+import DeleteProject from './DeleteProject';
+import ModifyProjetct from './ModifyProject';
 
 export default function ProjectDetails() {
     const { id } = useParams();
@@ -29,14 +31,17 @@ export default function ProjectDetails() {
     console.log(project)
 
     return (
-        <div>
+        <div className='main-project'>
             {project ? (
                 <>
                     <BannerProject projectTitle={project.title} />
                 </>
             ) : ('')
-
             }
+            <div className='button-project'>
+                <DeleteProject></DeleteProject>
+                <ModifyProjetct></ModifyProjetct>
+            </div>
             <div className='project-detail' >
                 {project ? (
                     <div className='project-article-main'>

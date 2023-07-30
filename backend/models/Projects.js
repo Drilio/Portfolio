@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 //création du modèle de base de donnée
 
 const projectShema = mongoose.Schema({
+    userId: { type: String, required: true },
     title: { type: String, required: true },
     github: { type: String, required: true },
     description: { type: String },
