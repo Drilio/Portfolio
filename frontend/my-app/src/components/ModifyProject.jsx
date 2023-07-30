@@ -23,7 +23,7 @@ export default function ModifyProjetct() {
         let form = document.getElementById('modify-projects-form');
         let formData = new FormData(form);
         let projectTitle = formData.get("title");
-        const regexTitle = /^[a-zA-Z0-9\s]+$/;
+        const regexTitle = /^[a-zA-Z0-9\s]*$/;
         let userId = localStorage.getItem('responseId');
         formData.append('userId', userId);
         checkboxesCheckId.forEach(id => {

@@ -29,43 +29,31 @@ exports.createProject = (req, res, next) => {
 
 exports.modifyProject = (req, res, next) => {
     console.log('-------------------------Enter Project.modify-----------------------------------');
-    console.log(req.file)
+    console.log(req.body)
     const projectObject = req.file ? {
-        ...JSON.parse(req, body.project),
-        imageUrl: `${req.body}://${req.get('host')}/images/${req.file.filename}`
-    } : { ...req.body };
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    }
+        : { ...req.body };
 
     delete projectObject.userId;
     console.log(req.params.id)
-    Project.findOne({ _id: req.params.id })
-        .then((Project) => {
-            console.log('Found Project:', Project);
-            console.log('Update Data:', projectObject);
-            if (Project.userId != req.auth.userId) {
-                res.status(401).json({ message: 'Non-Autorisé' });
-            } else {
-                Project.updateOne({ _id: req.params.id }, { ...projectObject, _id: req.params.id })
-                    .then((updateResult) => {
-                        console.log('Update Result:', updateResult);
-                        if (updateResult.nModified === 1) {
-                            console.log('Object successfully modified.');
-                            res.status(200).json({ message: 'Objet modifié !' });
-                        } else {
-                            console.log('No changes were made to the object.');
-                            res.status(200).json({ message: 'Aucune modification effectuée.' });
-                        }
-                    })
-                    .catch(error => {
-                        console.log('Error updating project:', error);
-                        res.status(500).json({ error });
-                    });
+    Project.findByIdAndUpdate(
+        req.params.id,
+        { ...projectObject },
+        { new: true, runValidators: true }
+    )
+        .then((updatedProject) => {
+            if (!updatedProject) {
+                return res.status(404).json({ message: 'Projet non trouvé' });
             }
+            console.log('Object successfully modified:', updatedProject);
+            res.status(200).json({ message: 'Objet modifié !' });
         })
         .catch((error) => {
-            console.log('Error finding project:', error);
-
+            console.log('Error updating project:', error);
             res.status(500).json({ error });
-        })
+        });
 }
 
 exports.deleteProject = (req, res, next) => {
