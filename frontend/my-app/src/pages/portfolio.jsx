@@ -241,7 +241,6 @@ export default function Portfolio() {
                                         <label htmlFor="description">Décrivez votre projet</label>
                                         <input type='text' className='description-project' size="5" name="description" placeholder="Présentez ici votre projet en quelques lignes"></input>
                                         <div className="upload-img-section">
-                                            <img id="img-preview" src="#" alt=""></img>
                                             <label htmlFor="upload-image">+ Ajouter photo</label>
                                             <input required type="file" onChange={handleImageChange} id="upload-image" name="image" accept="image/png, image/jpeg, image/webp"></input>
                                         </div>

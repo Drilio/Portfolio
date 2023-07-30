@@ -90,12 +90,12 @@ export default function ModifyProjetct() {
     }, [])
 
     return (
-        <div>
+        <div className="">
             <button className="modify-project-button" onClick={() => handleOpenModal('A')}>Modifier le projet</button>
             <Modal
                 isOpen={isModalOpen}
                 content={
-                    <div>
+                    <div className="modify-modal" >
                         <button onClick={handleCloseModal} className="close-button">X</button>
                         <div className="modify-modal">
                             <form method='POST' id="modify-projects-form" onSubmit={ModifyThisProject} className="modify-projects-form">
@@ -121,7 +121,6 @@ export default function ModifyProjetct() {
                                 <label htmlFor="description">Décrivez votre projet</label>
                                 <input type='text' className='description-project' size="5" name="description" placeholder="Présentez ici votre projet en quelques lignes"></input>
                                 <div className="upload-img-section">
-                                    <img id="img-preview" src="#" alt=""></img>
                                     <label htmlFor="upload-image">+ Ajouter photo</label>
                                     <input type="file" onChange={handleImageChange} id="upload-image" name="image" accept="image/png, image/jpeg, image/webp"></input>
                                 </div>

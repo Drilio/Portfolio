@@ -23,7 +23,8 @@
 }
 
 .language-modal,
-.modal-projects {
+.modal-projects,
+.modify-modal {
     overflow: auto;
     padding: 50px;
     max-height: -webkit-fill-available;
