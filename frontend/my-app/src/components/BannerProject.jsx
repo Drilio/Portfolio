@@ -1,12 +1,14 @@
 import '../style/banner.css';
+import TypingAnimation from './TypingAnimation';
 
 export default function BannerProject({ projectTitle }) {
+    const textsArray = [projectTitle, projectTitle]
 
     return (
         <div>
             <div className="banner-project">
                 <div className="type-writing-container">
-                    <h1>{projectTitle}</h1>
+                    <h1><TypingAnimation texts={textsArray} delay={100}></TypingAnimation></h1>
                     <span id="your-target-element-id"></span>
                 </div>
                 <div className='social-media'>

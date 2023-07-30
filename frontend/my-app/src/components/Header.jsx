@@ -61,7 +61,7 @@ export default function Header() {
                 <nav >
                     <div className='nav-header'>
                         <h1 id='header-name'>Antoine</h1>
-                        <ul className='menu-link' style={menuStyle}>
+                        <ul className='menu-link' id="menu-link" style={menuStyle}>
                             <li><NavLink to="/" id="projects" className="header-link">PORTFOLIO</NavLink></li>
                             <li><NavLink to="/about" id="about" className="header-link">A PROPOS</NavLink></li>
                             <li><NavLink to="/contacts" id="contacts" className="header-link">CONTACTS</NavLink></li>

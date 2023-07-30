@@ -27,22 +27,6 @@
     min-height: 170px;
 }
 
-/* Type writting effect */
-.typed-out {
-    overflow: hidden;
-    border-right: .15em solid white;
-    white-space: nowrap;
-    font-size: 100px;
-    width: 0;
-    animation:
-        typing 1.5s steps(30, end) forwards,
-        blink 1.2s infinite;
-}
-
-.type-writing-container {
-    display: inline-block;
-}
-
 .list-social-media {
     display: flex;
     gap: 25px;
