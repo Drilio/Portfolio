@@ -29,16 +29,24 @@ exports.createProject = (req, res, next) => {
 
 exports.modifyProject = (req, res, next) => {
     console.log('-------------------------Enter Project.modify-----------------------------------');
-    console.log(req.body)
+    console.log(req.body);
+
     const projectObject = req.file ? {
         ...req.body,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     }
         : { ...req.body };
+    for (let i in projectObject) {
+        if (projectObject[i] === '') {
+            delete projectObject[i];
+        }
+    }
+    console.log(projectObject)
 
     delete projectObject.userId;
     console.log(req.params.id)
     Project.findByIdAndUpdate(
+
         req.params.id,
         { ...projectObject },
         { new: true, runValidators: true }

@@ -25,7 +25,8 @@ export default function ProjectDetails() {
 
 
     useEffect(() => {
-        fetchProjectData()
+        fetchProjectData();
+        document.getElementById('header').className = 'header';
     }, [fetchProjectData])
 
     console.log(project)

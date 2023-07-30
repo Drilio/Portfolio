@@ -17,6 +17,10 @@ export default function Projects({ filtersNames }) {
 
     }
 
+    function filterProjects(event) {
+
+    }
+
 
     useEffect(() => {
         fetchProjectsData()
@@ -47,7 +51,7 @@ export default function Projects({ filtersNames }) {
                                     <div className='test-overlay'>
                                         <h3 className='title-project'>{project.title}</h3>
                                         {project.languagesUse.map(language => (
-                                            <p className='project-name' key={`${project._id}-${language}`}>
+                                            <p className={language} key={`${project._id}-${language}`}>
                                                 {language}
                                             </p>
                                         ))}
