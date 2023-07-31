@@ -1,7 +1,7 @@
 import Projects from "../components/Projects"
 import { useState, useEffect } from 'react'
 import "../style/portfolio.css"
-import IsConnected from '../components/AuthHelper';
+import IsConnected from '../helper/AuthHelper';
 import Modal from '../components/Modal';
 import Languages from "../components/Languages";
 import AboutMe from "../components/AboutMe";
@@ -17,7 +17,6 @@ export default function Portfolio() {
     const [imageUrl, setImageUrl] = useState('');
     const [nameLanguage, setNameLanguage] = useState('')
     const [imageLanguageUrl, setImageLanguageUrl] = useState('');
-    const [formProject, setFormProject] = useState(false)
     const [formLanguage, setFormLanguage] = useState(false)
     const [filtersNames, setFiltersNames] = useState([])
 
@@ -72,6 +71,7 @@ export default function Portfolio() {
 
     const handleCloseModal = () => {
         setModalOpen(false);
+        setFormLanguage(false);
         let header = document.getElementById('header')
         header.style.display = ""
     };
@@ -81,16 +81,6 @@ export default function Portfolio() {
         setImageUrl(URL.createObjectURL(e.target.files[0]));
     }
 
-
-    //gestion du formulaire Projet
-
-    function makeFormProjectsAppear() {
-        setFormProject(true)
-    }
-
-    function makeFormProjectsDisapear() {
-        setFormProject(false)
-    }
 
     function handleFormSubmit(event) {
         event.preventDefault();
@@ -173,7 +163,7 @@ export default function Portfolio() {
     return (
         <div className="portfolio-main">
             <Banner />
-            <div>
+            <div id="about">
                 <AboutMe />
             </div>
             {isConnected ? (
@@ -189,7 +179,7 @@ export default function Portfolio() {
                                         <div className="top-modal-form-language">
                                             <div className="button-modal">
                                                 <button className="close-button" onClick={makeFormLanguagesDisapear}><i className="fa-solid fa-arrow-left"></i></button>
-                                                <button onClick={handleCloseModal} className="close-button">X</button>
+                                                <button onClick={handleCloseModal} className="close-button"><i class="fa-solid fa-xmark"></i></button>
                                             </div>
                                             <h2>Ajouter un langage</h2>
                                         </div>
@@ -198,15 +188,17 @@ export default function Portfolio() {
                                                 <label htmlFor='Name'>Nom du language</label>
                                                 <input type="text" id="languages-name" value={nameLanguage} onChange={(event) => setNameLanguage(event.target.value)} placeholder="Entrer le nom du language" name="Name" required></input>
                                                 <div className="upload-img-section">
-                                                    <label className="upload-image" htmlFor="upload-image">{imageLanguageUrl ? <img className="form-img-preview" src={imageLanguageUrl} alt='preview'></img> : <p className="upload-section"> <i className="fa-solid fa-cloud-arrow-up"></i> Veuillez upload un Logo</p>}</label>
+                                                    <label className="upload-image" htmlFor="upload-image">{imageLanguageUrl ? <img className="form-img-preview" src={imageLanguageUrl} alt='preview'></img> : <p className="upload-section"> <i className="fa-solid fa-cloud-arrow-up"></i> Upload un Logo</p>}</label>
                                                     <input required type="file" onChange={handleImageLanguageChange} id="upload-image" name="image" accept="image/png, image/jpeg, image/webp"></input>
-                                                    <input type="submit" id='add-languages-form-submit' value='Créer le langage'></input>
+                                                    <button type="submit" id='add-languages-form-submit' value='Créer le langage'>Créer le langage</button>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>) : (<div className="modal-one-language">
                                         <div className="modal-languages">
-                                            <button onClick={handleCloseModal} className="close-button">X</button>
+                                            <div className="button-modal-languages">
+                                                <button onClick={handleCloseModal} className="close-button"><i class="fa-solid fa-xmark"></i></button>
+                                            </div>
                                             <h2>Gérer les langage</h2>
                                             <Languages></Languages>
                                         </div>
@@ -215,9 +207,8 @@ export default function Portfolio() {
 
                             </div> :
                             <div className="modal-projects">
-                                {formProject ? (<div>
-                                    <button onClick={handleCloseModal} className="close-button">X</button>
-                                    <button onClick={makeFormProjectsDisapear}>X</button>
+                                <div>
+                                    <button onClick={handleCloseModal} className="close-button"><i class="fa-solid fa-xmark"></i></button>
                                     <form method='post' id="add-projects-form" onSubmit={handleFormSubmit} className="add-projects-form">
                                         <label>Titre du projet</label>
                                         <input type="text" id="madd-projects-form-title" placeholder="Entrer le titre du projet" name="title" required></input>
@@ -239,28 +230,26 @@ export default function Portfolio() {
                                             </div>
                                         </fieldset>
                                         <label htmlFor="description">Décrivez votre projet</label>
-                                        <input type='text' className='description-project' size="5" name="description" placeholder="Présentez ici votre projet en quelques lignes"></input>
+                                        <textarea type='text' rows={4} cols={50} className='description-project' name="description" placeholder="Présentez ici votre projet en quelques lignes"></textarea>
                                         <div className="upload-img-section">
                                             <label htmlFor="upload-image">+ Ajouter photo</label>
                                             <input required type="file" onChange={handleImageChange} id="upload-image" name="image" accept="image/png, image/jpeg, image/webp"></input>
                                         </div>
-                                        {imageUrl ? <img src={imageUrl} alt='preview'></img> : <p> veuillez upload une image</p>}
+                                        {imageUrl ? <img src={imageUrl} alt='preview'></img> : <p>upload une image</p>}
                                         <input type="submit" id='add-projects-form-submit' value='Créer le projet'></input>
                                     </form>
-                                </div>) : (<div>
-                                    <div>
-                                        <button onClick={handleCloseModal} className="close-button">X</button>
-                                    </div>
-                                    <button onClick={makeFormProjectsAppear}>Ajouter un projet</button>
-                                </div>)}
+                                </div>
                             </div>
                         }
                     ></Modal>
                 </div>)
                 : ("")}
-
-            <Projects filtersNames={filtersNames} />
-            <ContactForm />
+            <div id='projects'>
+                <Projects filtersNames={filtersNames} />
+            </div>
+            <div id="contact">
+                <ContactForm />
+            </div>
         </div>
     )
 }

@@ -28,6 +28,7 @@
     overflow: auto;
     padding: 50px;
     max-height: -webkit-fill-available;
+    height: 100%;
 }
 
 .close-button {
@@ -35,4 +36,69 @@
     background-color: #fff;
     -webkit-box-shadow: none;
     font-weight: bold;
+}
+
+.button-modal-languages {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+i {
+    font-size: 20px;
+}
+
+i:hover {
+    cursor: pointer;
+}
+
+input#languages-name {
+    width: 200px;
+}
+
+form#add-languages-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+form#add-projects-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+form#add-projects-form input {
+    margin: 0 0 25px 0;
+    padding: 0;
+    display: block;
+    width: 50%;
+    height: 48px;
+    font-size: 13px;
+    color: #292929;
+    letter-spacing: -0.045em;
+    font-weight: 500;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    resize: none;
+    outline: 0;
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+}
+
+form#add-projects-form input[type='checkbox'] {
+    margin: initial;
+    width: auto;
+    height: auto;
+    letter-spacing: normal;
+    -webkit-appearance: auto;
+    display: initial;
+}
+
+.languageId label {
+    margin: 0 0 0 10px;
 }

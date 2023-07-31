@@ -114,10 +114,10 @@ export default function Connection() {
                 <h2>CONNEXION</h2>
                 <form id="my-connection-form" onSubmit={userLogin}>
                     <label htmlFor="my-connection-form-username">Email</label>
-                    <input type="email" id="my-connection-form-username" placeholder="Entrer le nom d'utilisateur" name="email" required></input>
+                    <input type="email" id="my-connection-form-username" placeholder="Entrer votre adresse mail" name="email" required></input>
                     <label htmlFor="my-connection-form-password">Mot de Passe</label>
                     <input id="my-connection-form-password" type="password" placeholder="Entrer le mot de passe" name="password" required></input>
-                    <input type="submit" id='my-connection-form-submit' value='Connexion'></input>
+                    <button type="submit" id='my-connection-form-submit' value='Connexion'>Connexion</button>
                     <p id="error-connection"></p>
                 </form>
             </div>
@@ -130,7 +130,7 @@ export default function Connection() {
                     <input type="text" id="my-signup-form-username" placeholder="Entrer le nom d'utilisateur" name="username" required></input>
                     <label htmlFor="my-signup-form-password">Mot de Passe</label>
                     <input id="my-signup-form-password" type="password" placeholder="Entrer le mot de passe" name="password" required></input>
-                    <input type="submit" id='my-signup-form-submit' value='Créer un compte'></input>
+                    <button type="submit" id='my-signup-form-submit' value='Créer un compte'>Créer votre compte</button>
                     <p id="error-signup"></p>
                 </form>
             </div>

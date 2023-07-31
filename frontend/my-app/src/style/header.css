@@ -41,6 +41,10 @@
     color: black
 }
 
+.header.scrolled h1#header-name {
+    color: black;
+}
+
 #header-name {
     font-family: 'Kaushan Script', cursive;
     font-size: 32px;
@@ -98,4 +102,8 @@
 .nav-header {
     display: flex;
     justify-content: space-between;
+}
+
+a {
+    text-decoration: none;
 }

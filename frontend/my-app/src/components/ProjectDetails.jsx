@@ -4,10 +4,32 @@ import '../style/projectDetails.css'
 import BannerProject from './BannerProject';
 import DeleteProject from './DeleteProject';
 import ModifyProjetct from './ModifyProject';
+import { Fragment } from 'react';
+import IsConnected from '../helper/AuthHelper';
 
 export default function ProjectDetails() {
     const { id } = useParams();
     const [project, setProject] = useState(null);
+    const [isConnected, setIsConnected] = useState(false);
+
+    //verification de la connexion 
+    useEffect(() => {
+        const token = window.localStorage.getItem('responseToken')
+        const userId = window.localStorage.getItem('responseId')
+
+        IsConnected(token, userId)
+            .then((isValid) => {
+                if (isValid === true) {
+                    setIsConnected(true);
+                } else {
+                    setIsConnected(false);
+                }
+            })
+            .catch((error) => {
+                console.log("test isConnected false")
+                setIsConnected(false)
+            });
+    })
 
     const fetchProjectData = useCallback(() => {
         fetch(`http://localhost:3000/api/projects/${id}`)
@@ -40,10 +62,13 @@ export default function ProjectDetails() {
                 </>
             ) : ('')
             }
-            <div className='button-project'>
-                <DeleteProject></DeleteProject>
-                <ModifyProjetct></ModifyProjetct>
-            </div>
+            {isConnected ? (
+                <div className='button-project'>
+                    <DeleteProject></DeleteProject>
+                    <ModifyProjetct></ModifyProjetct>
+                </div>
+            ) : ('')}
+
             <div className='project-detail' >
                 {project ? (
                     <div className='project-article-main'>
@@ -65,8 +90,14 @@ export default function ProjectDetails() {
                         <div className='article-img'>
                             <img src={project.imageUrl} alt="project-preview"></img>
                         </div>
+                        <div className='git-hub-project'><a href={project.github}><i className="fa-brands fa-github"></i>
+                            <p>Lien Github du projet</p></a></div>
                         <div className='project-description'>
-                            <p>{project.description}</p>
+                            {project.description.split('\r\n').map((paragraph, index) => (
+                                <Fragment key={index}>
+                                    <p>{paragraph}</p>
+                                </Fragment>
+                            ))}
                         </div>
                     </div>
                 ) : (

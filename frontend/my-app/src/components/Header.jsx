@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import "../style/header.css";
-import IsConnected from './AuthHelper';
+import IsConnected from '../helper/AuthHelper';
+import { HashLink } from 'react-router-hash-link';
 
 export default function Header() {
     const [isConnected, setIsConnected] = useState(false);
@@ -51,7 +52,7 @@ export default function Header() {
         if (isConnected) {
             localStorage.clear();
             setIsConnected(false); // Mise à jour de l'état isConnected après la déconnexion
-            document.location.href = "./";
+            document.location.href = "/";
         }
     }
 
@@ -60,11 +61,11 @@ export default function Header() {
             <div className="top-header">
                 <nav >
                     <div className='nav-header'>
-                        <h1 id='header-name'>Antoine</h1>
+                        <NavLink to='/'><h1 id='header-name'>Antoine</h1></NavLink>
                         <ul className='menu-link' id="menu-link" style={menuStyle}>
-                            <li><NavLink to="/" id="projects" className="header-link">PORTFOLIO</NavLink></li>
-                            <li><NavLink to="/about" id="about" className="header-link">A PROPOS</NavLink></li>
-                            <li><NavLink to="/contacts" id="contacts" className="header-link">CONTACTS</NavLink></li>
+                            <li><HashLink smooth to="/#about" id="about-link" className="header-link">A PROPOS</HashLink></li>
+                            <li><HashLink smooth to="/#projects" id="projects-link" className="header-link">PORTFOLIO</HashLink></li>
+                            <li><HashLink smooth to="/#contact" id="contacts-link" className="header-link">CONTACTS</HashLink></li>
                             <ul className='menu-connection'>
                                 {isConnected ? (
                                     <li><NavLink to="/" id="log" className="header-link" onClick={log}>DECONNEXION</NavLink></li>
