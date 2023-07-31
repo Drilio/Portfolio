@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import Filters from './filters'
 
 import "../style/projects.css"
 export default function Projects({ filtersNames }) {
 
     const [projects, setProjects] = useState([])
+    const [filter, setFilter] = useState('tous');
 
-    const fetchProjectsData = () => {
+    const fetchProjectsData = (allProjects) => {
         fetch("http://localhost:3000/api/projects")
             .then(response => {
                 return response.json()
@@ -17,33 +19,24 @@ export default function Projects({ filtersNames }) {
 
     }
 
-    function filterProjects(event) {
-
-    }
-
 
     useEffect(() => {
         fetchProjectsData()
+        console.log(projects)
     }, [])
 
+    const filteredProjects = filter === 'tous'
+        ? projects
+        : projects.filter(project => project.languagesUse.includes(filter));
 
     return (
         <div className='section-projects'>
 
             <h2>Traveaux Récents</h2>
-            <div className='filters-projects'>
-                <div>
-                    <button className='filters'>Tous</button>
-                </div>
-                {filtersNames.map(name => (
-                    <div className="language" key={name + 'filters'}>
-                        <button className='filters'>{name}</button>
-                    </div>
-                ))}
-            </div>
-            {projects.length > 0 && (
+            <Filters filtersNames={filtersNames} setFilter={setFilter} ></Filters>
+            {filteredProjects.length > 0 && (
                 <div className='projects-contener'>
-                    {projects.map(project => (
+                    {filteredProjects.map(project => (
                         <div className="project" key={project._id}>
                             <img src={project.imageUrl} alt="project-preview"></img>
                             <Link to={`/project/${project._id}`}>

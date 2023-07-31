@@ -77,7 +77,9 @@ button {
 
 .section-projects {
     z-index: 0;
-    margin: 0 40px 0 40px
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
 .form-img-preview {
@@ -137,4 +139,8 @@ input.description-project {
 
 .button-add-language {
     width: 40%;
+}
+
+.selected-filter {
+    color: #fdd912;
 }
