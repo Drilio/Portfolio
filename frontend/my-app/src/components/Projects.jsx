@@ -23,7 +23,7 @@ export default function Projects({ filtersNames }) {
     useEffect(() => {
         fetchProjectsData()
         console.log(projects)
-    }, [])
+    }, [projects])
 
     const filteredProjects = filter === 'tous'
         ? projects

@@ -15,7 +15,6 @@ const IsConnected = async (token, userId) => {
 
         if (response.ok) {
             console.log("ok")
-            const data = await response.json();
             return true;
         } else {
             console.log("not ok")

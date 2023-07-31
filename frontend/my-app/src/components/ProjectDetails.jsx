@@ -90,7 +90,7 @@ export default function ProjectDetails() {
                         <div className='article-img'>
                             <img src={project.imageUrl} alt="project-preview"></img>
                         </div>
-                        <div className='git-hub-project'><a href={project.github}><i className="fa-brands fa-github"></i>
+                        <div className='git-hub-project'><a href={project.github} rel="noreferrer" target="_blank"><i className="fa-brands fa-github"></i>
                             <p>Lien Github du projet</p></a></div>
                         <div className='project-description'>
                             {project.description.split('\r\n').map((paragraph, index) => (
