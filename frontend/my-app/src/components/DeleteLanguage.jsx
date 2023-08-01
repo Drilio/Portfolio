@@ -5,7 +5,7 @@ export default function DeleteThisLanguage({ id }) {
     async function DeleteThisLanguage() {
         console.log('hey')
         try {
-            const response = await fetch(`http://localhost:3000/api/languages/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}api/languages/${id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('responseToken')}`,

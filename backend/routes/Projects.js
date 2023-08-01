@@ -3,7 +3,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 const sharp = require('../middleware/sharp');
-const projectCtrl = require('../controllers/projects.js');
+const projectCtrl = require('../controllers/projects');
 
 
 router.post('/', multer, sharp, projectCtrl.createProject);

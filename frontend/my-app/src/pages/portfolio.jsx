@@ -19,13 +19,13 @@ export default function Portfolio() {
     const [imageLanguageUrl, setImageLanguageUrl] = useState('');
     const [formLanguage, setFormLanguage] = useState(false)
     const [filtersNames, setFiltersNames] = useState([])
-
+    const [isLoad, setIsLoad] = useState('')
+    // Ajouter un state is Loging qui permet d'activé un rechargement sans rechargé la page 
 
     //verficiation de la connexion
     useEffect(() => {
         const token = window.localStorage.getItem('responseToken')
         const userId = window.localStorage.getItem('responseId')
-
         IsConnected(token, userId)
             .then((isValid) => {
                 if (isValid === true) {
@@ -38,11 +38,11 @@ export default function Portfolio() {
                 console.log("test isConnected false")
                 setIsConnected(false)
             });
-    }, [])
+    }, [isLoad])
 
     //import des langages depuis la base de donnée
     const fetchLanguagesData = () => {
-        fetch("http://localhost:3000/api/languages")
+        fetch(`${process.env.REACT_APP_API_URL}api/languages`)
             .then(response => {
                 return response.json()
             })
@@ -104,13 +104,14 @@ export default function Portfolio() {
             formData.append('languagesId', id);
         });
         if (regexTitle.test(projectTitle)) {
-            fetch('http://localhost:3000/api/projects', {
+            fetch(`${process.env.REACT_APP_API_URL}api/projects`, {
                 method: "POST",
                 body: formData
             })
-                .then(res => res.json())
-                .then(res => console.log(res))
-                .then(document.location.href = "./")
+                .then((res) => {
+                    console.log(res);
+
+                })
                 .catch(error => {
                     console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
                 });
@@ -145,13 +146,17 @@ export default function Portfolio() {
         // Regex pour valider le nom de la langue (lettres, chiffres et espaces autorisés)
         const regexName = /^[a-zA-Z0-9\s]+$/;
         if (regexName.test(languageName)) {
-            fetch('http://localhost:3000/api/languages', {
+            fetch(`${process.env.REACT_APP_API_URL}api/languages`, {
                 method: "POST",
                 body: formData
             })
-                .then(res => res.json())
-                .then(res => console.log(res))
-                .then(document.location.href = "./")
+                .then((res) => {
+                    res.json()
+                    console.log(res)
+                    setIsLoad(res)
+                    setModalOpen(false)
+                    setFormLanguage(false)
+                })
                 .catch(error => {
                     console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
                 });
@@ -246,7 +251,7 @@ export default function Portfolio() {
                 </div>)
                 : ("")}
             <div id='projects'>
-                <Projects filtersNames={filtersNames} />
+                <Projects isLoad={isLoad} filtersNames={filtersNames} />
             </div>
             <div id="contact">
                 <ContactForm />

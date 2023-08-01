@@ -23,7 +23,7 @@ export default function Connection() {
                 name: name
             };
             // Appel de la fonction fetch avec toutes les informations nécessaires
-            fetch("http://localhost:3000/api/auth/signup", {
+            fetch(`${process.env.REACT_APP_API_URL}api/auth/signup`, {
                 method: "post",
                 headers: { "Content-Type": "application/json", "accept": "application/json" },
                 body: JSON.stringify(user)
@@ -68,7 +68,7 @@ export default function Connection() {
             let chargeUtile = JSON.stringify(user);
             console.log(chargeUtile)
             // Appel de la fonction fetch avec toutes les informations nécessaires
-            fetch("http://localhost:3000/api/auth/login", {
+            fetch(`${process.env.REACT_APP_API_URL}api/auth/login`, {
                 method: "post",
                 headers: { "Content-Type": "application/json", "accept": "application/json" },
                 body: chargeUtile
@@ -91,7 +91,7 @@ export default function Connection() {
                     //on récupère l'heure et la date et on les sauvegardes dans le localStorage
                     localStorage.setItem("DerniereConnexion", new Date());
                     // On envoie vers la page d'acueil
-                    document.location.href = "./";
+                    // document.location.href = "./";
                 })
                 // si l'authentification n'a pas fonctionné
                 .catch(function (error) {

@@ -40,6 +40,7 @@ exports.getOneLanguage = (req, res, next) => {
 }
 
 exports.modifyLanguage = (req, res, next) => {
+    languageObject = req.body;
     delete languageObject._userId;
     language.findOne({ _id: req.params.id })
         .then((language) => {

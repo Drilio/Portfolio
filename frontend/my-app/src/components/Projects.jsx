@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import Filters from './filters'
 
 import "../style/projects.css"
-export default function Projects({ filtersNames }) {
+export default function Projects({ filtersNames, isLoad }) {
 
     const [projects, setProjects] = useState([])
     const [filter, setFilter] = useState('tous');
 
     const fetchProjectsData = () => {
-        fetch("http://localhost:3000/api/projects")
+        fetch(`${process.env.REACT_APP_API_URL}api/projects`)
             .then(response => {
                 return response.json()
             })
@@ -22,7 +22,7 @@ export default function Projects({ filtersNames }) {
 
     useEffect(() => {
         fetchProjectsData();
-    }, []);
+    }, [isLoad]);
 
     const filteredProjects = filter === 'tous'
         ? projects

@@ -7,7 +7,7 @@ const IsConnected = async (token, userId) => {
         };
 
         // Appel de la fonction fetch avec toutes les informations nécessaires
-        const response = await fetch("http://localhost:3000/api/auth/isconnect", {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}api/auth/isconnect`, {
             method: "post",
             headers: { "Content-Type": "application/json", "accept": "application/json" },
             body: JSON.stringify(user)

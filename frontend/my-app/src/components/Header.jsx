@@ -32,7 +32,6 @@ export default function Header() {
             if (targetElement) {
                 const { top } = targetElement.getBoundingClientRect();
                 if (top <= 0) {
-                    console.log('User has scrolled to the precise point on the page');
                     setHeaderClassName('scrolled');
                     setMenuStyle({ display: 'flex' })
                 } else {

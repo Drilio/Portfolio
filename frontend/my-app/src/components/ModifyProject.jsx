@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Modal from "./Modal";
 
-export default function ModifyProjetct() {
+export default function ModifyProjetct({ setIsLoad }) {
     const [isModalOpen, setModalOpen] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
     const { id } = useParams();
@@ -31,7 +31,7 @@ export default function ModifyProjetct() {
         });
         if (regexTitle.test(projectTitle)) {
             try {
-                const response = await fetch(`http://localhost:3000/api/projects/${id}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}api/projects/${id}`, {
                     method: 'PUT',
                     body: formData,
                     headers: {
@@ -39,7 +39,8 @@ export default function ModifyProjetct() {
                     },
                 });
                 if (response.ok) {
-                    document.location.href = `./${id}`;
+                    setIsLoad(response);
+                    setModalOpen(false)
                 } else {
                     console.log('Failed to modify project:', response.status);
                     // Handle the error or show an appropriate message
@@ -73,7 +74,7 @@ export default function ModifyProjetct() {
     }
     //import des langages depuis la base de donnée
     const fetchLanguagesData = () => {
-        fetch("http://localhost:3000/api/languages")
+        fetch(`${process.env.REACT_APP_API_URL}api/languages`)
             .then(response => {
                 return response.json()
             })

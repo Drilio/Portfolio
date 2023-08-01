@@ -17,7 +17,7 @@ export default function ContactForm() {
                 name: name,
                 message: message
             };
-            fetch('http://localhost:3000/api/send', {
+            fetch(`${process.env.REACT_APP_API_URL}api/send`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "accept": "application/json" },
                 body: JSON.stringify(body)

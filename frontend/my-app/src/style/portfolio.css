@@ -5,6 +5,10 @@
     gap: 100px;
 }
 
+#projects {
+    margin: 0 20px 0 20px;
+}
+
 .add-projects-languages {
     display: flex;
     justify-content: space-evenly;

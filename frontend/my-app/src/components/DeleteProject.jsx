@@ -5,7 +5,7 @@ export default function DeleteProject() {
 
     async function DeleteThisProject() {
         try {
-            await fetch(`http://localhost:3000/api/projects/${id}`, {
+            await fetch(`${process.env.REACT_APP_API_URL}api/projects/${id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('responseToken')}`,

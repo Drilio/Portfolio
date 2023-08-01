@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import DeleteThisLanguage from './DeleteLanguage';
+import ModifyLanguage from './ModifyLanguage';
 
 export default function Languages() {
 
@@ -7,7 +8,7 @@ export default function Languages() {
 
     //import des langages depuis la base de donnée
     const fetchLanguagesData = () => {
-        fetch("http://localhost:3000/api/languages")
+        fetch(`${process.env.REACT_APP_API_URL}api/languages`)
             .then(response => {
                 return response.json()
             })
@@ -33,10 +34,9 @@ export default function Languages() {
                             <img src={language.imageUrl} alt="project-preview"></img>
                             <div className='overlay'>
                                 <DeleteThisLanguage id={language._id}></DeleteThisLanguage>
-                                <button className='modal-language-button js-modify-modify'><i className="fa-solid fa-eye"></i></button>
+                                <ModifyLanguage id={language._id}></ModifyLanguage>
                             </div>
                         </div>
-
                     ))}
                 </div>
             )}

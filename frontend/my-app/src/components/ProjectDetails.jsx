@@ -12,6 +12,7 @@ export default function ProjectDetails() {
     const [project, setProject] = useState(null);
     const [isConnected, setIsConnected] = useState(false);
 
+    const [isLoad, setIsLoad] = useState('')
     //verification de la connexion 
     useEffect(() => {
         const token = window.localStorage.getItem('responseToken')
@@ -32,7 +33,7 @@ export default function ProjectDetails() {
     })
 
     const fetchProjectData = useCallback(() => {
-        fetch(`http://localhost:3000/api/projects/${id}`)
+        fetch(`${process.env.REACT_APP_API_URL}api/projects/${id}`)
             .then(response => {
                 return response.json()
             })
