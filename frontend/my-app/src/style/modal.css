@@ -24,7 +24,7 @@
 
 .language-modal,
 .modal-projects,
-.modify-modal {
+.modify-modal-main {
     overflow: auto;
     padding: 50px;
     max-height: -webkit-fill-available;
@@ -101,4 +101,24 @@ form#add-projects-form input[type='checkbox'] {
 
 .languageId label {
     margin: 0 0 0 10px;
+}
+
+form#add-projects-form input#upload-image {
+    display: none;
+}
+
+button#add-projects-form-submit {
+    width: 150px;
+    margin: auto;
+}
+
+button#add-projects-form-submit {
+    width: 170px;
+    margin: auto;
+}
+
+form#modify-projects-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }

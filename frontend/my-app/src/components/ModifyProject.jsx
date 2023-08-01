@@ -95,7 +95,7 @@ export default function ModifyProjetct() {
             <Modal
                 isOpen={isModalOpen}
                 content={
-                    <div className="modify-modal" >
+                    <div className="modify-modal-main" >
                         <button onClick={handleCloseModal} className="close-button">X</button>
                         <div className="modify-modal">
                             <form method='POST' id="modify-projects-form" onSubmit={ModifyThisProject} className="modify-projects-form">
@@ -119,13 +119,12 @@ export default function ModifyProjetct() {
                                     </div>
                                 </fieldset>
                                 <label htmlFor="description">Décrivez votre projet</label>
-                                <input type='text' className='description-project' size="5" name="description" placeholder="Présentez ici votre projet en quelques lignes"></input>
+                                <textarea type='text' rows={4} cols={50} className='description-project' name="description" placeholder="Présentez ici votre projet en quelques lignes"></textarea>
                                 <div className="upload-img-section">
-                                    <label htmlFor="upload-image">+ Ajouter photo</label>
+                                    <label className="upload-image" htmlFor="upload-image">{imageUrl ? <img className="form-img-preview" src={imageUrl} alt='preview'></img> : <p className="upload-section"> <i className="fa-solid fa-cloud-arrow-up"></i> Upload un Logo</p>}</label>
                                     <input type="file" onChange={handleImageChange} id="upload-image" name="image" accept="image/png, image/jpeg, image/webp"></input>
                                 </div>
-                                {imageUrl ? <img src={imageUrl} alt='preview'></img> : <p> veuillez upload une image</p>}
-                                <input type="submit" id='add-projects-form-submit' value='Modifier le projet'></input>
+                                <button type="submit" id='add-projects-form-submit' value='Modifier le projet'>Modifier le projet</button>
                             </form>
                         </div>
                     </div>

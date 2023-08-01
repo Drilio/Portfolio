@@ -139,6 +139,8 @@ export default function Portfolio() {
 
         let form = document.getElementById("add-languages-form");
         let formData = new FormData(form);
+        let userId = localStorage.getItem('responseId');
+        formData.append('userId', userId);
         let languageName = formData.get("Name");
         // Regex pour valider le nom de la langue (lettres, chiffres et espaces autorisés)
         const regexName = /^[a-zA-Z0-9\s]+$/;
@@ -149,7 +151,7 @@ export default function Portfolio() {
             })
                 .then(res => res.json())
                 .then(res => console.log(res))
-                .then(document.location.href = "./portfolio")
+                .then(document.location.href = "./")
                 .catch(error => {
                     console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
                 });
@@ -232,11 +234,10 @@ export default function Portfolio() {
                                         <label htmlFor="description">Décrivez votre projet</label>
                                         <textarea type='text' rows={4} cols={50} className='description-project' name="description" placeholder="Présentez ici votre projet en quelques lignes"></textarea>
                                         <div className="upload-img-section">
-                                            <label htmlFor="upload-image">+ Ajouter photo</label>
+                                            <label className="upload-image" htmlFor="upload-image">{imageUrl ? <img className="form-img-preview" src={imageUrl} alt='preview'></img> : <p className="upload-section"> <i className="fa-solid fa-cloud-arrow-up"></i> Upload un Logo</p>}</label>
                                             <input required type="file" onChange={handleImageChange} id="upload-image" name="image" accept="image/png, image/jpeg, image/webp"></input>
                                         </div>
-                                        {imageUrl ? <img src={imageUrl} alt='preview'></img> : <p>upload une image</p>}
-                                        <input type="submit" id='add-projects-form-submit' value='Créer le projet'></input>
+                                        <button type="submit" id='add-projects-form-submit' value='Créer le projet'>Créer le projet</button>
                                     </form>
                                 </div>
                             </div>

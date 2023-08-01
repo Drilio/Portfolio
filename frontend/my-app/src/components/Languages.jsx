@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import DeleteThisLanguage from './DeleteLanguage';
 
 export default function Languages() {
 
@@ -30,7 +31,12 @@ export default function Languages() {
                         <div className="language" key={language._id}>
                             <h3>{language.Name}</h3>
                             <img src={language.imageUrl} alt="project-preview"></img>
+                            <div className='overlay'>
+                                <DeleteThisLanguage id={language._id}></DeleteThisLanguage>
+                                <button className='modal-language-button js-modify-modify'><i className="fa-solid fa-eye"></i></button>
+                            </div>
                         </div>
+
                     ))}
                 </div>
             )}

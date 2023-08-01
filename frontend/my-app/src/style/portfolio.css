@@ -42,9 +42,10 @@
 
 .modal-languages .language {
     display: flex;
-    width: calc((100% - 200px)/3);
+    width: calc((100% - 60px)/3);
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .modal-languages .languages-contener img {
@@ -68,6 +69,24 @@
 .top-modal-form-language .button-modal {
     display: flex;
     justify-content: space-between;
+}
+
+.overlay {
+    display: flex;
+    color: black;
+    justify-content: space-around;
+}
+
+.language:hover .overlay {
+    opacity: 1;
+}
+
+.language img {
+    object-fit: initial;
+}
+
+.language:hover img {
+    transform: scale(1.1);
 }
 
 button {

@@ -55,6 +55,10 @@
     transform: scale(1.1);
 }
 
+.modal-language-button {
+    background: none;
+}
+
 .project-name,
 .title-project {
     color: white;

@@ -2,11 +2,13 @@ const language = require('../models/Languages');
 
 exports.createLanguage = (req, res, next) => {
     console.log(req.body)
+    const languageObject = req.body;
     const name = req.body.Name
     const regexName = /^[a-zA-Z0-9\s]+$/;
     console.log(regexName.test(name))
     if (regexName.test(name)) {
         const newObject = new language({
+            ...languageObject,
             Name: name,
             imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         });
@@ -57,6 +59,7 @@ exports.modifyLanguage = (req, res, next) => {
 exports.deleteLanguage = (req, res, next) => {
     language.findOne({ _id: req.params.id })
         .then(language => {
+            console.log(language.userId, req.auth.userId)
             if (language.userId != req.auth.userId) {
                 res.status(401).json({ message: 'Non-autorisé' });
             } else {

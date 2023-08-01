@@ -8,7 +8,7 @@ export default function Projects({ filtersNames }) {
     const [projects, setProjects] = useState([])
     const [filter, setFilter] = useState('tous');
 
-    const fetchProjectsData = (allProjects) => {
+    const fetchProjectsData = () => {
         fetch("http://localhost:3000/api/projects")
             .then(response => {
                 return response.json()
@@ -21,9 +21,8 @@ export default function Projects({ filtersNames }) {
 
 
     useEffect(() => {
-        fetchProjectsData()
-        console.log(projects)
-    }, [projects])
+        fetchProjectsData();
+    }, []);
 
     const filteredProjects = filter === 'tous'
         ? projects
