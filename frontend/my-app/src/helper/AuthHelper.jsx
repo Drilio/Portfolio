@@ -14,10 +14,8 @@ const IsConnected = async (token, userId) => {
         });
 
         if (response.ok) {
-            console.log("ok")
             return true;
         } else {
-            console.log("not ok")
             throw new Error('la validation du token a échoué');
         }
     } catch (error) {

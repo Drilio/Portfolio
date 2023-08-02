@@ -97,29 +97,35 @@ export default function Portfolio() {
         let form = document.getElementById('add-projects-form');
         let formData = new FormData(form);
         let projectTitle = formData.get("title");
-        const regexTitle = /^[a-zA-Z0-9\s]+$/;
+        let gitlink = formData.get("github");
+
+        const regexTitle = new RegExp("^[a-zA-Z0-9\\s]+$");
+        const regexgit = new RegExp("https://github.com/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+");
         let userId = localStorage.getItem('responseId');
         formData.append('userId', userId);
+
         checkboxesCheckId.forEach(id => {
             formData.append('languagesId', id);
         });
-        if (regexTitle.test(projectTitle)) {
+
+        if (regexTitle.test(projectTitle) && regexgit.test(gitlink)) {
             fetch(`${process.env.REACT_APP_API_URL}api/projects`, {
                 method: "POST",
                 body: formData
             })
                 .then((res) => {
                     console.log(res);
-
+                    setIsLoad(res);
+                    setModalOpen(false);
                 })
                 .catch(error => {
                     console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
                 });
-        } else {
+        } if (!regexTitle.test(projectTitle)) {
             alert("Veuillez entrer un titre valide (lettres, chiffres et espaces autorisés).");
+        } else if (!regexgit.test(gitlink)) {
+            alert("Veuillez entrer un lien github valide");
         }
-
-
     }
 
     //Gestion du formulaire Langage
@@ -151,11 +157,12 @@ export default function Portfolio() {
                 body: formData
             })
                 .then((res) => {
-                    res.json()
-                    console.log(res)
-                    setIsLoad(res)
-                    setModalOpen(false)
-                    setFormLanguage(false)
+                    res.json();
+                    console.log(res);
+                    setIsLoad(res);
+                    setModalOpen(false);
+                    setFormLanguage(false);
+                    setImageLanguageUrl('');
                 })
                 .catch(error => {
                     console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
@@ -164,7 +171,6 @@ export default function Portfolio() {
             alert("Veuillez entrer un nom de langue valide (lettres, chiffres et espaces autorisés).");
         }
     }
-    console.log("Languages prop in ParentComponent:", filtersNames);
 
 
     return (
@@ -186,7 +192,7 @@ export default function Portfolio() {
                                         <div className="top-modal-form-language">
                                             <div className="button-modal">
                                                 <button className="close-button" onClick={makeFormLanguagesDisapear}><i className="fa-solid fa-arrow-left"></i></button>
-                                                <button onClick={handleCloseModal} className="close-button"><i class="fa-solid fa-xmark"></i></button>
+                                                <button onClick={handleCloseModal} className="close-button"><i className="fa-solid fa-xmark"></i></button>
                                             </div>
                                             <h2>Ajouter un langage</h2>
                                         </div>
@@ -204,7 +210,7 @@ export default function Portfolio() {
                                     </div>) : (<div className="modal-one-language">
                                         <div className="modal-languages">
                                             <div className="button-modal-languages">
-                                                <button onClick={handleCloseModal} className="close-button"><i class="fa-solid fa-xmark"></i></button>
+                                                <button onClick={handleCloseModal} className="close-button"><i className="fa-solid fa-xmark"></i></button>
                                             </div>
                                             <h2>Gérer les langage</h2>
                                             <Languages></Languages>
@@ -215,7 +221,7 @@ export default function Portfolio() {
                             </div> :
                             <div className="modal-projects">
                                 <div>
-                                    <button onClick={handleCloseModal} className="close-button"><i class="fa-solid fa-xmark"></i></button>
+                                    <button onClick={handleCloseModal} className="close-button"><i className="fa-solid fa-xmark"></i></button>
                                     <form method='post' id="add-projects-form" onSubmit={handleFormSubmit} className="add-projects-form">
                                         <label>Titre du projet</label>
                                         <input type="text" id="madd-projects-form-title" placeholder="Entrer le titre du projet" name="title" required></input>

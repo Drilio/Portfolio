@@ -39,12 +39,11 @@ export default function ProjectDetails() {
             })
             .then(data => {
                 setProject(data)
-                console.log(data)
             })
             .catch(error => {
                 console.error('Error fetching project data:', error);
             });
-    }, [id]);
+    }, [id, isLoad]);
 
 
     useEffect(() => {
@@ -53,7 +52,6 @@ export default function ProjectDetails() {
         document.getElementById('menu-link').style = 'display:none;'
     }, [fetchProjectData])
 
-    console.log(project)
 
     return (
         <div className='main-project'>
@@ -65,8 +63,8 @@ export default function ProjectDetails() {
             }
             {isConnected ? (
                 <div className='button-project'>
-                    <DeleteProject></DeleteProject>
-                    <ModifyProjetct></ModifyProjetct>
+                    <DeleteProject ></DeleteProject>
+                    <ModifyProjetct setIsLoad={setIsLoad}></ModifyProjetct>
                 </div>
             ) : ('')}
 
@@ -102,7 +100,9 @@ export default function ProjectDetails() {
                         </div>
                     </div>
                 ) : (
-                    <p>Loading...</p>
+                    <div className="loader-container">
+                        <div className="spinner"></div>
+                    </div>
                 )}
             </div>
         </div>
