@@ -69,3 +69,11 @@ div#about {
     -webkit-box-shadow: inset 0 -6px 0 #fdd912;
     -khtml-box-shadow: inset 0 -6px 0 #fdd912;
 }
+
+
+@media (max-width: 770px) {
+
+    .img-about-me {
+        width: 100%;
+    }
+}

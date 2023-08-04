@@ -48,8 +48,10 @@ export default function ProjectDetails() {
 
     useEffect(() => {
         fetchProjectData();
-        document.getElementById('header').className = 'header';
-        document.getElementById('menu-link').style = 'display:none;'
+        if (window.innerWidth > 760) {
+            document.getElementById('header').className = 'header';
+            document.getElementById('menu-link').style = 'display:none;'
+        }
     }, [fetchProjectData])
 
 

@@ -39,3 +39,12 @@ a {
     font-size: 25px;
     padding: 0;
 }
+
+
+@media (max-width: 770px) {
+
+    .banner h1,
+    .banner-project h1 {
+        font-size: 60px;
+    }
+}

@@ -129,29 +129,78 @@ a {
         justify-content: space-around;
         flex-flow: column nowrap;
         z-index: 10;
+        position: absolute;
     }
 
     .header-menu-burger {
+        width: 200px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+    }
+
+    .header-menu-burger-open {
         width: 200px;
         height: 100%;
         position: fixed;
         top: 0;
         left: 0;
-        transition: all 0.4 ease 0s;
-        -webkit-transition: all 0.4s ease 0s;
         z-index: 100;
     }
 
     .container-burger-link {
         background: #ffffff;
         height: 100%;
-        padding: 20px;
-
+        -webkit-animation: moveFromLeft .6s ease both;
+        animation: moveFromLeft .6s ease both;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding-top: 60px;
     }
+
+    @-webkit-keyframes moveFromLeft {
+        from {
+            -webkit-transform: translateX(-100%);
+        }
+    }
+
+    @keyframes moveFromLeft {
+        from {
+            -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+        }
+    }
+
+    @-webkit-keyframes moveToLeftFade {
+        from {}
+
+        to {
+            opacity: 0.3;
+            -webkit-transform: translateX(-100%);
+        }
+    }
+
+    @keyframes moveToLeftFade {
+        from {}
+
+        to {
+            opacity: 0.3;
+            -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+        }
+    }
+
+
 
     .top-header-burger,
     .top-header-burger nav,
     .nav-header-burger {
+        width: 100%;
+    }
+
+    .top-header-burger-open,
+    .top-header-burger-open nav,
+    .nav-header-burger-open {
         height: 100%;
         width: 100%;
     }
@@ -163,6 +212,18 @@ a {
     }
 
     .button-burger-container {
+        padding: 20px;
+        width: 40px;
+        position: absolute;
+    }
+
+    .button-burger-container-open {
+        padding: 20px;
+        width: 40px;
+        position: absolute;
+    }
+
+    .container-open {
         padding: 20px;
     }
 
@@ -182,6 +243,12 @@ a {
         padding: 0;
         display: flex;
         gap: 20px;
+        padding: 20px;
+        width: 100%;
     }
 
+    .menu-link-burger .menu-connection {
+        padding: 0;
+        margin: 0;
+    }
 }

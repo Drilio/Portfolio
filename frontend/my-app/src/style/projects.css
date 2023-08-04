@@ -89,3 +89,14 @@
     line-height: 40px;
     font-weight: 400;
 }
+
+@media (max-width: 770px) {
+    .projects-contener {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .project {
+        width: 100%;
+    }
+}

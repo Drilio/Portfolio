@@ -97,3 +97,18 @@ img {
 .project-description {
     margin: 0 20px 0 20px;
 }
+
+@media (max-width: 770px) {
+    .article-img {
+        width: 100%;
+    }
+
+    .project-detail {
+        margin: 10px;
+
+    }
+
+    img {
+        object-fit: contain;
+    }
+}

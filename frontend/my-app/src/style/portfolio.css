@@ -167,3 +167,14 @@ input.description-project {
 .selected-filter {
     color: #fdd912;
 }
+
+@media (max-width: 770px) {
+    .banner h1 {
+        font-size: 60px;
+    }
+
+    .about-me-main {
+        flex-direction: column;
+    }
+
+}

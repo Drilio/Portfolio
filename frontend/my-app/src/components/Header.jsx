@@ -83,19 +83,19 @@ export default function Header() {
     return (
         <>
             {screenWidth < 760 ? (
-                <div id='header-burger' className='header-menu-burger'>
-                    <div className="top-header-burger">
+                <div id='header-burger' className={hamburgerOpen ? 'header-menu-burger-open' : 'header-menu-burger'}>
+                    <div className={hamburgerOpen ? "top-header-burger-open" : "top-header-burger"}>
                         <nav >
-                            <div className='nav-header-burger'>
-                                <div className='hamburger-menu' onClick={toggleHamburger}>
+                            <div className={hamburgerOpen ? 'nav-header-burger-open' : 'nav-header-burger'}>
+                                <div className={hamburgerOpen ? 'button-burger-container-open' : 'button-burger-container'} onClick={toggleHamburger} >
+                                    <Hamburger isOpen={setHamburgerOpen} ></Hamburger>
+                                </div>
+                                <div className='hamburger-menu'>
                                     {!hamburgerOpen ? (
-                                        <div className='button-burger-container'>
-                                            <Hamburger isOpen={setHamburgerOpen} ></Hamburger>
-                                        </div>
+                                        ""
                                     ) : (
                                         <div className='container-burger-link' style={menuStyleBurger}>
                                             <ul className='menu-link-burger' id="menu-link-burger">
-                                                <Hamburger isOpen={setHamburgerOpen}></Hamburger>
                                                 <li><HashLink smooth to="/#about" id="about-link-burger" className="header-link-burger">A PROPOS</HashLink></li>
                                                 <li><HashLink smooth to="/#projects" id="projects-link-burger" className="header-link-burger">PORTFOLIO</HashLink></li>
                                                 <li><HashLink smooth to="/#contact" id="contacts-link-burger" className="header-link-burger">CONTACTS</HashLink></li>
@@ -107,6 +107,7 @@ export default function Header() {
                                                     )}
                                                 </ul>
                                             </ul>
+
                                         </div>
                                     )}
                                 </div>
