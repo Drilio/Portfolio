@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const fs = require('fs');
 
 exports.createProject = (req, res, next) => {
+    console.log('ENTERING CREATE PROJECT')
     const projectObject = req.body;
     const regexTitle = /^[a-zA-Z0-9\s]+$/;
     const title = req.body.title
