@@ -1,6 +1,7 @@
 const sharp = require('sharp');
 const fs = require("fs");
 const path = require("path");
+require("dotenv").config();
 
 module.exports = (req, res, next) => {
     try {
@@ -10,7 +11,7 @@ module.exports = (req, res, next) => {
             //retailler l'image
             sharp()
                 .resize({
-                    width: 500,
+                    width: process.env.IMG_RESIZE,
                 })
             next();
         } else {
@@ -19,9 +20,9 @@ module.exports = (req, res, next) => {
 
             //retailler l'image + conversion en webp
             sharp(req.file.path)
-                .webp({ quality: 80 })
+                .webp({ quality: process.env.IMG_QUALITY })
                 .resize({
-                    width: 500,
+                    width: process.env.IMG_RESIZE,
                 })
                 .toFile(newPath, function () {
                     fs.unlinkSync(`./images/${req.file.filename}`);

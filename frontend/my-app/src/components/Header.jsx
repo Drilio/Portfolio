@@ -8,7 +8,7 @@ import Hamburger from './hamburger';
 export default function Header() {
     const [isConnected, setIsConnected] = useState(false);
     const [headerClassName, setHeaderClassName] = useState('');
-    const [menuStyle, setMenuStyle] = useState()
+    const [menuStyle, setMenuStyle] = useState({ display: 'none', })
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [menuStyleBurger, setMenuStyleBurger] = useState({ display: 'none', })
@@ -16,7 +16,6 @@ export default function Header() {
     useEffect(() => {
         const token = window.localStorage.getItem('responseToken');
         const userId = window.localStorage.getItem('responseId');
-
 
         IsConnected(token, userId)
             .then((isValid) => {
@@ -96,9 +95,11 @@ export default function Header() {
                                     ) : (
                                         <div className='container-burger-link' style={menuStyleBurger}>
                                             <ul className='menu-link-burger' id="menu-link-burger">
-                                                <li><HashLink smooth to="/#about" id="about-link-burger" className="header-link-burger">A PROPOS</HashLink></li>
-                                                <li><HashLink smooth to="/#projects" id="projects-link-burger" className="header-link-burger">PORTFOLIO</HashLink></li>
-                                                <li><HashLink smooth to="/#contact" id="contacts-link-burger" className="header-link-burger">CONTACTS</HashLink></li>
+                                                <div className='link-list-mobil'>
+                                                    <li><HashLink smooth to="/#about" id="about-link-burger" className="header-link-burger">A PROPOS</HashLink></li>
+                                                    <li><HashLink smooth to="/#projects" id="projects-link-burger" className="header-link-burger">PORTFOLIO</HashLink></li>
+                                                    <li><HashLink smooth to="/#contact" id="contacts-link-burger" className="header-link-burger">CONTACTS</HashLink></li>
+                                                </div>
                                                 <ul className='menu-connection'>
                                                     {isConnected ? (
                                                         <li><NavLink to="/" id="log-burger" className="header-link-burger" onClick={log}>DECONNEXION</NavLink></li>

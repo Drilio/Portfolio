@@ -31,6 +31,11 @@ a {
     min-height: 170px;
 }
 
+#arrow-down {
+    display: flex;
+    align-items: center;
+}
+
 .list-social-media {
     display: flex;
     gap: 25px;
@@ -40,6 +45,34 @@ a {
     padding: 0;
 }
 
+.arrow-down {
+    position: absolute;
+    bottom: 9vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+i.fa-solid.fa-chevron-down {
+    position: absolute;
+    font-size: 30px;
+    color: white;
+    animation: mouse-anim 1s ease-out 0s infinite;
+}
+
+@keyframes mouse-anim {
+    0% {
+        top: 0px;
+    }
+
+    50% {
+        top: 10px;
+    }
+
+    100% {
+        top: 0px;
+    }
+}
 
 @media (max-width: 770px) {
 

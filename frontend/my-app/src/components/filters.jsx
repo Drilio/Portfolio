@@ -4,7 +4,6 @@ export default function Filters({ filtersNames, setFilter }) {
     const [selectedFilter, setSelectedFilter] = useState('tous');
 
     function filterProjects(filter) {
-        console.log("ENTERING FILTERS");
         setFilter(filter)
         setSelectedFilter(filter);
     }

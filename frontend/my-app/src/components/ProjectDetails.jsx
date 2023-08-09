@@ -6,11 +6,13 @@ import DeleteProject from './DeleteProject';
 import ModifyProjetct from './ModifyProject';
 import { Fragment } from 'react';
 import IsConnected from '../helper/AuthHelper';
+import Spinner from './spinner'
 
 export default function ProjectDetails() {
     const { id } = useParams();
     const [project, setProject] = useState(null);
     const [isConnected, setIsConnected] = useState(false);
+    const [isLoadingComplete, setIsLoadingComplete] = useState(false);
 
     const [isLoad, setIsLoad] = useState('')
     //verification de la connexion 
@@ -43,8 +45,11 @@ export default function ProjectDetails() {
             .catch(error => {
                 console.error('Error fetching project data:', error);
             });
-    }, [id, isLoad]);
+    }, [id]);
 
+    const handleLoadingComplete = () => {
+        setIsLoadingComplete(true);
+    };
 
     useEffect(() => {
         fetchProjectData();
@@ -52,7 +57,7 @@ export default function ProjectDetails() {
             document.getElementById('header').className = 'header';
             document.getElementById('menu-link').style = 'display:none;'
         }
-    }, [fetchProjectData])
+    }, [fetchProjectData, isLoad])
 
 
     return (
@@ -69,44 +74,51 @@ export default function ProjectDetails() {
                     <ModifyProjetct setIsLoad={setIsLoad}></ModifyProjetct>
                 </div>
             ) : ('')}
+            {!isLoadingComplete ? (
+                <Spinner onLoadingComplete={handleLoadingComplete} />
+            ) : (
+                <div className='project-detail' >
+                    {project ? (
+                        <div className='project-article-main'>
+                            <h2>{project.title}</h2>
+                            <div className='project-language-container'>
+                                {Array.isArray(project.languagesUse) ? (
+                                    <ul>
+                                        {project.languagesUse.map(language => (
+                                            <li className='project-language' key={`${project._id}-${language}`}>{language}</li>
+                                        ))}
+                                    </ul>
 
-            <div className='project-detail' >
-                {project ? (
-                    <div className='project-article-main'>
-                        <h2>{project.title}</h2>
-                        <div className='project-language-container'>
-                            {Array.isArray(project.languagesUse) ? (
-                                <ul>
-                                    {project.languagesUse.map(language => (
-                                        <li className='project-language' key={`${project._id}-${language}`}>{language}</li>
-                                    ))}
-                                </ul>
+                                ) : (
+                                    <p>No languages specified for this project.</p>
+                                )}
+                            </div>
 
-                            ) : (
-                                <p>No languages specified for this project.</p>
-                            )}
+
+                            <div className='article-img'>
+                                <img src={project.imageUrl} alt="project-preview"></img>
+                            </div>
+                            <div className='git-hub-project'><a href={project.github} rel="noreferrer" target="_blank"><i className="fa-brands fa-github"></i>
+                                <p>Lien Github du projet</p></a></div>
+                            <div className='project-description'>
+                                {project.description.split('\r\n').map((paragraph, index) => (
+                                    <Fragment key={index}>
+                                        <p>{paragraph}</p>
+                                    </Fragment>
+                                ))}
+                            </div>
                         </div>
+                    ) : (
+                        <div className="loader-container">
+                            <div className="spinner"></div>
+                        </div>
+                    )}
+                </div>
 
 
-                        <div className='article-img'>
-                            <img src={project.imageUrl} alt="project-preview"></img>
-                        </div>
-                        <div className='git-hub-project'><a href={project.github} rel="noreferrer" target="_blank"><i className="fa-brands fa-github"></i>
-                            <p>Lien Github du projet</p></a></div>
-                        <div className='project-description'>
-                            {project.description.split('\r\n').map((paragraph, index) => (
-                                <Fragment key={index}>
-                                    <p>{paragraph}</p>
-                                </Fragment>
-                            ))}
-                        </div>
-                    </div>
-                ) : (
-                    <div className="loader-container">
-                        <div className="spinner"></div>
-                    </div>
-                )}
-            </div>
+            )}
+
+
         </div>
 
     )

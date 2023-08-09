@@ -4,13 +4,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 // import du path du serveur 
 const path = require('path');
+//import du .env
+require("dotenv").config();
 //import des routes
 const userRoutes = require('./routes/user');
 const projectRoutes = require('./routes/Projects');
 const languagesRoutes = require('./routes/languages');
 const sendRoutes = require('./routes/send');
 
-mongoose.connect('mongodb+srv://antoineroy92:test123@clustervieuxgrimoire.wfdhr4u.mongodb.net/portfolio',
+mongoose.connect(process.env.MONGODB_URL,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true

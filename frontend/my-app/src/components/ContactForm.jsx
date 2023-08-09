@@ -1,8 +1,16 @@
-import '../style/contactForm.css'
+import '../style/contactForm.css';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useRef } from 'react';
+
+
 export default function ContactForm() {
+
+    const captchaRef = useRef(null);
 
     function handleSubmit(event) {
         event.preventDefault();
+        const token = captchaRef.current.getValue();
+        captchaRef.current.reset();
         let form = document.getElementById("contact-form");
         let email = event.target.querySelector("[name=email]").value;
         let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -15,7 +23,8 @@ export default function ContactForm() {
             let body = {
                 email: email,
                 name: name,
-                message: message
+                message: message,
+                token: token
             };
             fetch(`${process.env.REACT_APP_API_URL}api/send`, {
                 method: "POST",
@@ -50,6 +59,7 @@ export default function ContactForm() {
                 <label htmlFor="message" required>Message</label>
                 <textarea name="message" placeholder='Message*' className="form-control" rows="5"></textarea>
                 <button type="submit" className="btn btn-primary">Envoyer</button>
+                <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} ref={captchaRef}></ReCAPTCHA>
             </form>
         </div>
 

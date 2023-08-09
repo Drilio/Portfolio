@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const backDelay = 5000; // Le temps entre les loops
+const backDelay = 2000; // Le temps entre les loops
 
 const TypingAnimation = ({ texts }) => {
     const [currentText, setCurrentText] = useState('');
@@ -19,7 +19,7 @@ const TypingAnimation = ({ texts }) => {
         } else {
             if (currentText === textToType) {
                 // Une fois finis d'écrire, on efface après X millisecondes
-                setTimeout(() => setIsErasing(true), 7500);
+                setTimeout(() => setIsErasing(true), 5000);
             }
         }
 

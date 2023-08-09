@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: calc(100% - 65px);
+    width: 100%;
     z-index: 20;
     opacity: 1;
     visibility: visible;
@@ -240,15 +240,20 @@ a {
 
     .hamburger-menu ul {
         list-style: none;
-        padding: 0;
         display: flex;
-        gap: 20px;
         padding: 20px;
         width: 100%;
+        justify-content: space-between;
     }
 
     .menu-link-burger .menu-connection {
         padding: 0;
         margin: 0;
+    }
+
+    .link-list-mobil {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 }

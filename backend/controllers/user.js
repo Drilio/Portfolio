@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+require("dotenv").config();
 
 exports.signup = (req, res, next) => {
     console.log(req.body)
@@ -20,6 +21,8 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
+    const jwtSecret = process.env.PASSWORD_AUTH;
+
     User.findOne({ mail: req.body.email })
         .then(user => {
             if (user === null) {
@@ -34,7 +37,7 @@ exports.login = (req, res, next) => {
                                 userId: user._id,
                                 token: jwt.sign(
                                     { userId: user._id },
-                                    'RANDOM_TOKEN_SECRET',
+                                    jwtSecret,
                                     { expiresIn: '24h' }
                                 )
                             });
@@ -51,12 +54,14 @@ exports.login = (req, res, next) => {
 exports.isconnect = (req, res, next) => {
     let userId = req.body.userId;
     let frontToken = req.body.token;
+    const jwtSecret = process.env.PASSWORD_AUTH;
+
     User.findOne({ _id: userId })
         .then(user => {
             if (user === null) {
                 res.status(401).json({ message: 'l\'utilisateur n\'existe pas' });
             } else {
-                jwt.verify(frontToken, 'RANDOM_TOKEN_SECRET', (error, decoded) => {
+                jwt.verify(frontToken, jwtSecret, (error, decoded) => {
                     if (error) {
                         res.status(401).json({ message: "le token n'est pas ou plus valide" })
                     } else {
