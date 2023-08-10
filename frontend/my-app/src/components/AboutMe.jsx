@@ -1,5 +1,5 @@
 import '../style/aboutMe.css'
-import placeholer from '../images/Lucette-Placeholder.webp'
+import placeholer from '../images/1688465065414.jpg'
 import DownloadCV from './DownloadCV'
 
 export default function AboutMe() {
