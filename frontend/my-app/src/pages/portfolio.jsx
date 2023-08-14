@@ -16,12 +16,10 @@ export default function Portfolio() {
     const [modalType, setModalType] = useState('A');
     const [imageUrl, setImageUrl] = useState('');
     const [nameLanguage, setNameLanguage] = useState('')
-    const [imageLanguageUrl, setImageLanguageUrl] = useState('');
     const [formLanguage, setFormLanguage] = useState(false)
     const [filtersNames, setFiltersNames] = useState([])
     const [isLoad, setIsLoad] = useState('')
-    // Ajouter un state is Loging qui permet d'activé un rechargement sans rechargé la page 
-
+    const [isLanguageChange, setIsLanguageChange] = useState('')
     //verficiation de la connexion
     useEffect(() => {
         const token = window.localStorage.getItem('responseToken')
@@ -58,7 +56,8 @@ export default function Portfolio() {
 
     useEffect(() => {
         fetchLanguagesData()
-    }, [])
+        setIsLanguageChange('')
+    }, [isLanguageChange])
 
 
     //gestion de la modal d'ajout
@@ -137,24 +136,35 @@ export default function Portfolio() {
         setFormLanguage(false)
     }
 
-    function handleImageLanguageChange(e) {
-        setImageLanguageUrl(URL.createObjectURL(e.target.files[0]));
-    }
 
     function handleFormLanguageSubmit(event) {
         event.preventDefault();
 
         let form = document.getElementById("add-languages-form");
+
         let formData = new FormData(form);
+
         let userId = localStorage.getItem('responseId');
         formData.append('userId', userId);
+
+        let token = localStorage.getItem('responseToken')
+        formData.append('token', token)
+
         let languageName = formData.get("Name");
+
         // Regex pour valider le nom de la langue (lettres, chiffres et espaces autorisés)
         const regexName = /^[a-zA-Z0-9\s]+$/;
+        const formDataObject = Object.fromEntries(formData);
+
         if (regexName.test(languageName)) {
+
             fetch(`${process.env.REACT_APP_API_URL}api/languages`, {
                 method: "POST",
-                body: formData
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formDataObject)
             })
                 .then((res) => {
                     res.json();
@@ -162,7 +172,6 @@ export default function Portfolio() {
                     setIsLoad(res);
                     setModalOpen(false);
                     setFormLanguage(false);
-                    setImageLanguageUrl('');
                 })
                 .catch(error => {
                     console.error('Oups, ça n\'a pas fonctionné comme prévu !', error);
@@ -200,11 +209,7 @@ export default function Portfolio() {
                                             <form method='post' id="add-languages-form" onSubmit={handleFormLanguageSubmit} className="add-languages-form">
                                                 <label htmlFor='Name'>Nom du language</label>
                                                 <input type="text" id="languages-name" value={nameLanguage} onChange={(event) => setNameLanguage(event.target.value)} placeholder="Entrer le nom du language" name="Name" required></input>
-                                                <div className="upload-img-section">
-                                                    <label className="upload-image" htmlFor="upload-image">{imageLanguageUrl ? <img className="form-img-preview" src={imageLanguageUrl} alt='preview'></img> : <p className="upload-section"> <i className="fa-solid fa-cloud-arrow-up"></i> Upload un Logo</p>}</label>
-                                                    <input required type="file" onChange={handleImageLanguageChange} id="upload-image" name="image" accept="image/png, image/jpeg, image/webp"></input>
-                                                    <button type="submit" id='add-languages-form-submit' value='Créer le langage'>Créer le langage</button>
-                                                </div>
+                                                <button type="submit" id='add-languages-form-submit' value='Créer le langage'>Créer le langage</button>
                                             </form>
                                         </div>
                                     </div>) : (<div className="modal-one-language">
@@ -212,8 +217,8 @@ export default function Portfolio() {
                                             <div className="button-modal-languages">
                                                 <button onClick={handleCloseModal} className="close-button"><i className="fa-solid fa-xmark"></i></button>
                                             </div>
-                                            <h2>Gérer les langage</h2>
-                                            <Languages></Languages>
+                                            <h2>Gérer les langages</h2>
+                                            <Languages setIsLanguageChange={setIsLanguageChange}></Languages>
                                         </div>
                                         <button className="button-add-language" onClick={makeFormLanguagesAppear}>Ajouter un langage </button>
                                     </div>)}

@@ -32,6 +32,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
 }
 
 .modal-languages .languages-contener {
@@ -40,7 +41,7 @@
 
 .modal-languages .language-contener {
     display: flex;
-    gap: 30px;
+    gap: 15px;
     flex-wrap: wrap;
 }
 
@@ -75,24 +76,92 @@
     justify-content: space-between;
 }
 
-.overlay {
+
+/* test langage mise en page  */
+.ag-courses_item {
+    -ms-flex-preferred-size: 30%;
+    flex-basis: 30%;
+    overflow: hidden;
+}
+
+.ag-courses-item_link {
+    display: block;
+    padding: 30px 20px;
+    background-color: #121212;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+.ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_date {
+    text-decoration: none;
+    color: #FFF;
+}
+
+.ag-courses-item_link:hover .ag-courses-item_bg {
+    -webkit-transform: scale(10);
+    -ms-transform: scale(10);
+    transform: scale(10);
+}
+
+.ag-courses-item_title {
+    min-height: 50px;
+    overflow: hidden;
+    font-weight: bold;
+    color: #FFF;
+    z-index: 1;
+    position: relative;
+}
+
+.ag-courses-item_bg {
+    height: 128px;
+    width: 128px;
+    background-color: #f9b234;
+
+    z-index: 0;
+    position: absolute;
+    top: -75px;
+    right: -75px;
+
+    border-radius: 50%;
+
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.ag-courses_item:nth-child(2n) .ag-courses-item_bg {
+    background-color: #3ecd5e;
+}
+
+.ag-courses_item:nth-child(3n) .ag-courses-item_bg {
+    background-color: #e44002;
+}
+
+.ag-courses_item:nth-child(4n) .ag-courses-item_bg {
+    background-color: #952aff;
+}
+
+.ag-courses_item:nth-child(5n) .ag-courses-item_bg {
+    background-color: #cd3e94;
+}
+
+.ag-courses_item:nth-child(6n) .ag-courses-item_bg {
+    background-color: #4c49ea;
+}
+
+.button-language-modal {
+    z-index: 1;
+    position: relative;
     display: flex;
-    color: black;
+    gap: 5px;
     justify-content: space-around;
+
 }
 
-.language:hover .overlay {
-    opacity: 1;
-}
-
-.language img {
-    object-fit: initial;
-}
-
-.language:hover img {
-    transform: scale(1.1);
-}
-
+/* fin du test */
 button {
     text-decoration: none;
     border: none;

@@ -35,6 +35,7 @@
     width: 15px;
     background-color: #fff;
     -webkit-box-shadow: none;
+    box-shadow: none;
     font-weight: bold;
 }
 
@@ -77,6 +78,7 @@ form#add-projects-form input {
     color: #292929;
     letter-spacing: -0.045em;
     font-weight: 500;
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     resize: none;
@@ -96,6 +98,7 @@ form#add-projects-form input[type='checkbox'] {
     height: auto;
     letter-spacing: normal;
     -webkit-appearance: auto;
+    appearance: auto;
     display: initial;
 }
 
@@ -121,4 +124,19 @@ form#modify-projects-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.add-languages-form-submit {
+    color: black;
+}
+
+.modify-language-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.modify-language-form label {
+    color: black;
 }
