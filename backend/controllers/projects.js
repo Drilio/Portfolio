@@ -15,7 +15,7 @@ exports.createProject = (req, res, next) => {
             imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         });
         console.log(project)
-
+        console.log('ENTERING SAVE')
         project.save()
             .then(() => {
                 res.status(201).json({ message: 'Object enregistré !' });
@@ -24,7 +24,7 @@ exports.createProject = (req, res, next) => {
                 res.status(400).json({ error });
             })
     } else {
-        res.status(400).json({ error })
+        res.status(400).json({ error: 'Invalid title' });
     }
 }
 
